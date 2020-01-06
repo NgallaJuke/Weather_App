@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./Assets/style.css" />
+    <title>Weather App SN</title>
+  </head>
+  <body>
+    <div class="container container-top">
+      <div class="location">
+        <div class="reg-time">
+          <span id="rg-cn">Dakar , Senegal</span>
+          <span id="curt-day-hour">Saturday , 8:00</span>
+        </div>
+        <span id="weather-condition">Mostly Cloudy</span>
+      </div>
+      <div class="weather">
+        <img src="./Assets/4.svg" alt="w-icon" />24
+        <span id="deg">&deg;</span>
+        <span id="celcius">
+          C
+        </span>
+      </div>
+      <svg id="wave1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path
+          fill="#FFF"
+          fill-opacity="1"
+          d="M0,128L60,154.7C120,181,240,235,360,234.7C480,235,600,181,720,181.3C840,181,960,235,1080,245.3C1200,256,1320,224,1380,208L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
+        ></path>
+      </svg>
+
+      <div class="precip">Precipitation <span>0%</span></div>
+    </div>
+
+    <div class="container container-bottom">
+      <div class="items">
+        <div class="freq">Hourly</div>
+        <div class="items-hours">
+          <div class="item-hour">
+            <div class="container-hour">
+              <div class="wth-icon">
+                Mon
+                <img src="./Assets/4.svg" alt="icon" />
+              </div>
+              <div class="temp">
+                <span id="temp-max">
+                  23&deg;
+                </span>
+                <span id="temp-min">
+                  19&deg;
+                </span>
+              </div>
+            </div>
+            <div id="cond">Sunny</div>
+          </div>
+          <div class="item-hour">2</div>
+          <div class="item-hour">3</div>
+          <div class="item-hour">4</div>
+          <div class="item-hour">5</div>
+          <div class="item-hour">6</div>
+          <div class="item-hour">7</div>
+          <div class="item-hour">8</div>
+          <div class="item-hour">9</div>
+        </div>
+        <div class="freq">Weekly</div>
+        <div class="items-weeks">
+          <div class="item-week">1</div>
+          <div class="item-week">2</div>
+          <div class="item-week">3</div>
+          <div class="item-week">4</div>
+          <div class="item-week">5</div>
+          <div class="item-week">6</div>
+          <div class="item-week">7</div>
+          <div class="item-week">8</div>
+          <div class="item-week">9</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
