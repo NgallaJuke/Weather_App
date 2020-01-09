@@ -36,12 +36,12 @@
 
     <div class="container container-bottom">
       <div class="items">
-        <div class="freq">Hourly</div>
-        <div class="items-hours">
-          <div class="item-hour">
+        <div class="freq">Weekly</div>
+        <div class="items-weeks">
+          <div class="item-week">
             <div class="container-hour">
               <div class="wth-icon">
-                Mon
+                <span class="day-hour">Mon</span>
                 <img src="./Assets/4.svg" alt="icon" />
               </div>
               <div class="temp">
@@ -53,7 +53,28 @@
                 </span>
               </div>
             </div>
-            <div id="cond">Sunny</div>
+            <div id="cond-week">Sunny</div>
+          </div>
+          <div class="item-week">2</div>
+          <div class="item-week">3</div>
+          <div class="item-week">4</div>
+          <div class="item-week">5</div>
+        </div>
+        <div class="freq">Hourly</div>
+        <div class="items-hours">
+          <div class="item-hour">
+            <div class="container-hour">
+              <div class="wth-icon">
+                <span class="day-hour">12h</span>
+                <img src="./Assets/4.svg" alt="icon" />
+              </div>
+              <div class="temp">
+                <span id="temp-avg">
+                  23&deg;
+                </span>
+              </div>
+            </div>
+            <div id="cond-hour">Sunny</div>
           </div>
           <div class="item-hour">2</div>
           <div class="item-hour">3</div>
@@ -63,20 +84,13 @@
           <div class="item-hour">7</div>
           <div class="item-hour">8</div>
           <div class="item-hour">9</div>
-        </div>
-        <div class="freq">Weekly</div>
-        <div class="items-weeks">
-          <div class="item-week">1</div>
-          <div class="item-week">2</div>
-          <div class="item-week">3</div>
-          <div class="item-week">4</div>
-          <div class="item-week">5</div>
-          <div class="item-week">6</div>
-          <div class="item-week">7</div>
-          <div class="item-week">8</div>
-          <div class="item-week">9</div>
+          <div class="item-hour">10</div>
+          <div class="item-hour">11</div>
+          <div class="item-hour">12</div>
         </div>
       </div>
     </div>
   </body>
+  <script src="./JS/forcast.js"></script>
+  <script src="./JS/app.js"></script>
 </html>

@@ -97,18 +97,13 @@ body {
   display: none;
 }
 
-.item-hour {
-  min-width: 100px;
-  height: 150px;
-  background-color: blue;
-  margin: 0 5px;
-  padding: 0 5px;
-}
+.item-hour,
 .item-week {
   min-width: 100px;
   height: 150px;
   background-color: blue;
   margin: 10px 5px;
+  padding: 0 5px;
 }
 
 .freq {
@@ -122,23 +117,30 @@ body {
   position: relative;
   margin: 0px;
 }
+.day-hour {
+  font-weight: bold;
+}
 .container-hour img {
   display: block;
+  margin: 0 10px;
   width: 80px;
 }
-#temp-max {
+#temp-max,
+#temp-avg {
   position: relative;
   font-size: 2rem;
   float: left;
   top: -11px;
 }
+
 #temp-min {
   position: absolute;
   font-size: 1.2rem;
   right: -0.1em;
   float: right;
 }
-#cond {
+#cond-hour,
+#cond-week {
   position: relative;
   bottom: -1.8em;
   left: -2.8em;
