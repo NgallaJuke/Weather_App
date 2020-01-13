@@ -1,15 +1,18 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap");
 body {
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
+  background: url(./blueSky.jpg);
+  background-repeat: inherit;
+  background-attachment: fixed;
 }
 
 .container {
   width: 100%;
   padding-top: 2em;
   padding-bottom: 2em;
-  padding-left: 1.8em;
+  padding-left: 1em;
 
   color: white;
 }
@@ -44,10 +47,6 @@ body {
   position: absolute;
   margin-top: 0.3em;
   font-size: 75px;
-  cursor: pointer;
-}
-.weather img {
-  cursor: default;
 }
 
 #deg {
@@ -72,11 +71,19 @@ body {
 }
 
 .precip span {
-  font-size: 2rem;
-  margin-left: 0.2em;
-  margin-right: 1.5em;
+  font-size: 1.5rem;
+}
+.precip img {
+  width: 40px;
 }
 
+.freq {
+  position: relative;
+  color: black;
+  margin: 1em 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
 .items-hours {
   display: flex;
   overflow-x: auto;
@@ -99,49 +106,63 @@ body {
 
 .item-hour,
 .item-week {
-  min-width: 100px;
-  height: 150px;
-  background-color: blue;
+  position: relative;
   margin: 10px 5px;
   padding: 0 5px;
 }
+.item-hour:hover,
+.item-week:hover {
+  background-color: #ece7e731;
+}
 
-.freq {
-  position: relative;
-  color: black;
-  margin: 1em 0;
+.rowsWheather {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icons-Day-Night {
+  padding: 10px 0 0 5px;
+  margin: 0 10px 0 0;
+}
+.day-In-Week-Cond {
+  font-size: 0.8rem;
+}
+
+.day-temps {
+  text-align: left;
+  margin-top: 5px;
+  font-weight: 500;
+  padding: 10px 0 0 0;
+}
+#temp-Min {
+  font-size: 1.1rem;
+  font-weight: 400;
+
+  margin: 0 5px 0 15px;
+}
+#temp-Max {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 700;
+
+  margin-left: 10px;
 }
-.container-hour {
-  position: relative;
-  margin: 0px;
+
+.day-In-Week {
+  margin-top: 5px;
+  text-align: left;
 }
-.day-hour {
-  font-weight: bold;
-}
-.container-hour img {
-  display: block;
-  margin: 0 10px;
+
+#icon-Day {
   width: 80px;
 }
-#temp-max,
-#temp-avg {
-  position: relative;
-  font-size: 2rem;
-  float: left;
-  top: -11px;
+#icon-night {
+  width: 80px;
 }
-
-#temp-min {
-  position: absolute;
-  font-size: 1.2rem;
-  right: -0.1em;
-  float: right;
+.wind-precip {
+  margin: 5px 0;
+  font-size: 0.8rem;
 }
-#cond-hour,
-#cond-week {
-  position: relative;
-  bottom: -1.8em;
-  left: -2.8em;
+.precipMin {
+  width: 20px;
 }
