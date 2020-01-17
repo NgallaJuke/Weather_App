@@ -16,13 +16,6 @@ const setGeolocation = () => {
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(setPosition, showError);
   }
-  //  else {
-  //   query = `?apikey=${key}&q=13.950,-16.167`;
-  //   const response = await fetch(geoURi + query);
-  //   const data = await response.json();
-  //   console.log(data);
-  //   return data;
-  // }
 };
 
 const getCurrentWeahter = async id => {
@@ -58,7 +51,11 @@ const setPosition = async position => {
   const query = `?apikey=${key}&q=${latitude},${longitude}`;
   const response = await fetch(geoURi + query);
   const data = await response.json();
-  updateCityName(data);
+  const city = data.AdministrativeArea.EnglishName;
+  console.log("data", data);
+  updateCurrentWeather(city);
+  updateWeeklyWeather(city);
+  updateHourlyWeather(city);
 };
 
 const showError = err => {

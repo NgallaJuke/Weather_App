@@ -27,8 +27,8 @@ const hour = currentDayAndHour.lastIndexOf(",");
 const currentDay = currentDayAndHour.substring(0, day);
 const currentHour = currentDayAndHour.substring(hour + 2, hour + 7);
 
-const updateCurrentWeather = async () => {
-  const cityDetails = await getCity("Thies");
+const updateCurrentWeather = async city => {
+  const cityDetails = await getCity(city);
   console.log("cityDetails", cityDetails);
   region_country.innerHTML = ` ${cityDetails.AdministrativeArea.EnglishName}, ${cityDetails.Country.EnglishName}`;
 
@@ -52,10 +52,8 @@ const updateCurrentWeather = async () => {
     precip.innerHTML = `${weatherDetails.PrecipitationType}`;
 };
 
-updateCurrentWeather();
-
-const updateWeeklyWeather = async () => {
-  const weatherDetails = await getCity("Thies");
+const updateWeeklyWeather = async city => {
+  const weatherDetails = await getCity(city);
   const key = weatherDetails.Key;
   const weekWeatherDetails = await getWeekWeahter(key);
   console.log("weekWeatherDetails", weekWeatherDetails);
@@ -130,8 +128,8 @@ const updateWeeklyWeather = async () => {
   //
 };
 
-const updateHourlyWeather = async () => {
-  const weatherDetails = await getCity("Thies");
+const updateHourlyWeather = async city => {
+  const weatherDetails = await getCity(city);
   const key = weatherDetails.Key;
   const hourWeatherDetails = await getHourWeahter(key);
   console.log("hourWeatherDetails", hourWeatherDetails);
@@ -169,6 +167,4 @@ const updateHourlyWeather = async () => {
     </div>`;
   });
 };
-
-updateHourlyWeather();
-updateWeeklyWeather();
+setGeolocation();
