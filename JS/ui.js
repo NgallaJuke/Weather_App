@@ -5,6 +5,7 @@ const weather_icon = document.querySelector(".weather img");
 const weather_temp = document.querySelector(".weather");
 const precip = document.querySelector(".precip span");
 const daily_weather = document.querySelector(".items-weeks");
+const hourly_weather = document.querySelector(".items-hours");
 //set tthe options to get the current day in a better format
 const options = {
   weekday: "long",
@@ -27,7 +28,7 @@ const currentDay = currentDayAndHour.substring(0, day);
 const currentHour = currentDayAndHour.substring(hour + 2, hour + 7);
 
 const updateCurrentWeather = async () => {
-  const cityDetails = await getCity("Dakar");
+  const cityDetails = await getCity("Thies");
   console.log("cityDetails", cityDetails);
   region_country.innerHTML = ` ${cityDetails.AdministrativeArea.EnglishName}, ${cityDetails.Country.EnglishName}`;
 
@@ -54,7 +55,7 @@ const updateCurrentWeather = async () => {
 updateCurrentWeather();
 
 const updateWeeklyWeather = async () => {
-  const weatherDetails = await getCity("Dakar");
+  const weatherDetails = await getCity("Thies");
   const key = weatherDetails.Key;
   const weekWeatherDetails = await getWeekWeahter(key);
   console.log("weekWeatherDetails", weekWeatherDetails);
@@ -73,17 +74,17 @@ const updateWeeklyWeather = async () => {
 
     daily_weather.innerHTML += `<div class="item-week">
    <div class="day-temps">
-     ${dayOfTheWeek}
+     <span id="day-of-week">${dayOfTheWeek}</span>
     
      <span id="temp-Max">
      ${((dailyweather.Temperature.Maximum.Value - 32) * (5 / 9)).toFixed(
        1
-     )}&deg;
+     )}&deg;C
      </span>
      <span id="temp-Min">
        ${((dailyweather.Temperature.Minimum.Value - 32) * (5 / 9)).toFixed(
          1
-       )}&deg;
+       )}&deg;C
      </span>
    </div>
    <div class="rowsWheather">
@@ -129,4 +130,45 @@ const updateWeeklyWeather = async () => {
   //
 };
 
+const updateHourlyWeather = async () => {
+  const weatherDetails = await getCity("Thies");
+  const key = weatherDetails.Key;
+  const hourWeatherDetails = await getHourWeahter(key);
+  console.log("hourWeatherDetails", hourWeatherDetails);
+
+  hourWeatherDetails.forEach(hourInDay => {
+    if (hourInDay.HasPrecipitation === false) hourInDay.HasPrecipitation = 0;
+    if (hourInDay.HasPrecipitation === false) hourInDay.HasPrecipitation = 0;
+
+    //setting the hour on the day
+    const hourOfTheWeek = new Date(hourInDay.DateTime)
+      .toUTCString()
+      .substring(17, 22);
+
+    hourly_weather.innerHTML += `<div class="item-hour">
+      <div class="hour-container">
+        <div class="time">${hourOfTheWeek}</div>
+        <div class="time-weather">${(
+          (hourInDay.Temperature.Value - 32) *
+          (5 / 9)
+        ).toFixed(1)}&deg;C</div>
+        <div>
+          <img id="icon-Hour" src="./Assets/icons/${
+            hourInDay.WeatherIcon
+          }.svg" alt="weather-icon" />
+        </div>
+        <div class="day-In-Week-Cond">${hourInDay.IconPhrase}</div>
+        <div class="wind-precip">
+          <img
+            class="precipMin"
+            src="./Assets/percipitation.svg"
+            alt="precip"
+          />${hourInDay.HasPrecipitation}%
+        </div>
+      </div>
+    </div>`;
+  });
+};
+
+updateHourlyWeather();
 updateWeeklyWeather();
