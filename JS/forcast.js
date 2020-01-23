@@ -11,12 +11,12 @@ const getCity = async city => {
   return data[0];
 };
 
-const setGeolocation = () => {
-  // enable the geolocalisation by the navigator
-  if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(setPosition, showError);
-  }
-};
+// const setGeolocation = () => {
+//   // enable the geolocalisation by the navigator
+//   if ("geolocation" in navigator) {
+//     navigator.geolocation.getCurrentPosition(setPosition, showError);
+//   }
+// };
 
 const getCurrentWeahter = async id => {
   const query = `${id}?apikey=${key}`;
@@ -43,20 +43,19 @@ const getHourWeahter = async id => {
   return data;
 };
 
-const setPosition = async position => {
-  const geoURi =
-    "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search";
-  const latitude = position.coords.latitude;
-  const longitude = position.coords.longitude;
-  const query = `?apikey=${key}&q=${latitude},${longitude}`;
-  const response = await fetch(geoURi + query);
-  const data = await response.json();
-  const city = data.AdministrativeArea.EnglishName;
-  console.log("data", data);
-  updateCurrentWeather(city);
-  updateWeeklyWeather(city);
-  updateHourlyWeather(city);
-};
+// const setPosition = async position => {
+//   const geoURi =
+//     "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search";
+//   const latitude = position.coords.latitude;
+//   const longitude = position.coords.longitude;
+//   const query = `?apikey=${key}&q=${latitude},${longitude}`;
+//   const response = await fetch(geoURi + query);
+//   const data = await response.json();
+//   const city = data.AdministrativeArea.EnglishName;
+//   updateCurrentWeather(city);
+//   updateWeeklyWeather(city);
+//   updateHourlyWeather(city);
+// };
 
 const showError = err => {
   console.log(err);

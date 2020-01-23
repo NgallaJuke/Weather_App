@@ -3,25 +3,58 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
+  color: white;
+
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
+.change-location {
+  padding-bottom: 15px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.change-location label {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.change-location input {
+  align-items: center;
+  height: 1.2rem;
+  background-color: #ece7e700;
+  padding: 0.3rem;
+  border: 1.5px solid white;
+  border-radius: 1rem;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.change-location input:focus {
+  outline: 0;
+  outline-color: transparent;
+  outline-style: none;
+}
 .container {
   width: 100%;
   padding-top: 2em;
   padding-bottom: 2em;
   padding-left: 1em;
-  background: url(./blueSky.jpg);
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
-  border: none;
+  padding-right: 1em;
 
-  color: white;
+  border: none;
+}
+.fade {
+  display: none;
 }
 .container-top {
   position: relative;
   height: 50vh;
-  color: white;
+
   border: none;
 }
 .container-bottom {
@@ -35,14 +68,17 @@ body {
   width: 100%;
 }
 #rg-cn {
+  position: relative;
   font-size: 1.5rem;
   font-weight: bold;
 }
+.reg-time {
+  position: relative;
+}
 #curt-day-hour {
-  margin-right: 2.1em;
+  display: block;
   float: right;
-  right: 0;
-  top: 0;
+  margin-right: 0.5em;
 }
 #weather-condition {
   display: block;
@@ -73,19 +109,18 @@ body {
   left: 0;
   bottom: 0em;
   margin-left: 1.5em;
-  font-size: normal;
 }
 
 .precip span {
   font-size: 1.5rem;
 }
 .precip img {
+  position: relative;
   width: 40px;
 }
 
 .freq {
   position: relative;
-  color: white;
   margin: 1em 0;
   font-size: 1.5rem;
   font-weight: bold;
@@ -148,8 +183,9 @@ body {
   margin: 0 10px 0 0;
 }
 .day-In-Week-Cond {
+  position: relative;
+  top: -20px;
   font-size: 0.8rem;
-  padding: 1em 0;
 }
 
 .day-temps {
@@ -186,7 +222,8 @@ body {
   width: 80px;
 }
 .wind-precip {
-  margin: 5px 0;
+  position: relative;
+  top: -15px;
   font-size: 0.8rem;
 }
 .precipMin {
@@ -206,14 +243,13 @@ body {
 }
 
 @media (max-width: 480px) {
-  .container {
+  .body {
     width: 100%;
     padding-top: 2em;
     padding-bottom: 2em;
     padding-left: 1em;
-    background: url(./Skyblue-mobile.jpeg);
-    background-size: cover;
-    background-attachment: scroll;
     background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
   }
 }
