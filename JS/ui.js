@@ -1,3 +1,4 @@
+const containerTop = document.querySelector(".container-top");
 const region_country = document.querySelector("#rg-cn");
 const current_day_hour = document.querySelector("#curt-day-hour");
 const weather_condition = document.querySelector("#weather-condition");
@@ -7,7 +8,8 @@ const precip = document.querySelector(".precip ");
 const daily_weather = document.querySelector(".items-weeks");
 const hourly_weather = document.querySelector(".items-hours");
 const container = document.querySelector(".container");
-const inputField = document.querySelector(".change-location input");
+const input = document.querySelector(".change-location input");
+const label = document.querySelector(".change-location label");
 const body = document.querySelector("body");
 // const precipIcon = document.querySelector(".precip img");
 
@@ -39,7 +41,6 @@ let precipType = "None";
 const updateCurrentWeather = async city => {
   const cityDetails = await getCity(city);
   console.log("cityDetails", cityDetails);
-  region_country.innerHTML = ` ${cityDetails.AdministrativeArea.EnglishName}, ${cityDetails.Country.EnglishName}`;
 
   const weatherDetails = await getCurrentWeahter(cityDetails.Key);
   console.log("weatherDetails", weatherDetails);
@@ -58,26 +59,36 @@ const updateCurrentWeather = async city => {
     precipIcon = "./Assets/precipBlack.svg";
     body.style.backgroundImage = "url('../Assets/DayWind.jpg')";
     container.style.color = "#000";
-    inputField.style.border = "1.5px solid #000";
-    inputField.style.color = "#000";
+    input.style.border = "1.5px solid #000";
+    label.style.color = "#000";
+    input.style.color = "#000";
   } else {
     iconDir = "./Assets/icons";
     body.style.backgroundImage = "url('../Assets/Skyblue-Night.jpeg')";
   }
 
-  precip.innerHTML = `${precipType}`;
-  current_day_hour.innerHTML = `${currentDay} , ${currentHour}`;
-  weather_condition.innerHTML = `${weatherDetails.WeatherText}`;
-
-  weather_temp.innerHTML = `<img src="${iconDir}/${weatherDetails.WeatherIcon}.svg" alt="w-icon" />${weatherDetails.Temperature.Metric.Value}
+  containerTop.innerHTML = `<div class="location">
+  <div class="reg-time">
+    <span id="rg-cn">${cityDetails.AdministrativeArea.EnglishName}, ${cityDetails.Country.EnglishName}</span>
+    <span id="curt-day-hour">${currentDay} , ${currentHour}</span>
+  </div>
+  <span id="weather-condition">${weatherDetails.WeatherText}</span>
+</div>
+<div class="weather">
+  <img src="${iconDir}/${weatherDetails.WeatherIcon}.svg" alt="W-icon" />
+  ${weatherDetails.Temperature.Metric.Value}
   <span id="deg">&deg;</span>
-  <span id="celcius">${weatherDetails.Temperature.Metric.Unit}
-  </span>
-  `;
+  <span id="celcius">C</span>
+</div>
 
-  precip.innerHTML = `<img src="${precipIcon}" alt="precip-icon" />
-          <span>${precipType}</span>
-    `;
+<div class="precip">
+  <img src="${precipIcon}" alt="precip-icon" />
+  <span>${precipType}</span>
+</div>`;
+  containerTop.addEventListener("load", function() {
+    const loader = document.querySelector(".loaderTop");
+    loader.classList.add("hidden"); // class "loader hidden"
+  });
 };
 
 const updateWeeklyWeather = async city => {
@@ -89,6 +100,7 @@ const updateWeeklyWeather = async city => {
 
   console.log("dayTime", DateTime);
 
+  daily_weather.innerHTML = "";
   weekWeatherDetails.forEach(dailyweather => {
     let precipDay = "None";
     let precipNight = "None";
@@ -159,7 +171,10 @@ const updateWeeklyWeather = async city => {
    </div>
  </div>`;
   });
-  //
+  daily_weather.addEventListener("load", function() {
+    const loader = document.querySelector(".loaderWeek");
+    loader.classList.add("hidden"); // class "loader hidden"
+  });
 };
 
 const updateHourlyWeather = async city => {
@@ -167,7 +182,7 @@ const updateHourlyWeather = async city => {
   const key = weatherDetails.Key;
   const hourWeatherDetails = await getHourWeahter(key);
   console.log("hourWeatherDetails", hourWeatherDetails);
-
+  hourly_weather.innerHTML = "";
   hourWeatherDetails.forEach(hourInDay => {
     let precipHour = "None";
     if (hourInDay.HasPrecipitation === true)
@@ -200,5 +215,10 @@ const updateHourlyWeather = async city => {
         </div>
       </div>
     </div>`;
+  });
+
+  hourly_weather.addEventListener("load", function() {
+    const loader = document.querySelector(".loaderHour");
+    loader.classList.add("hidden"); // class "loader hidden"
   });
 };

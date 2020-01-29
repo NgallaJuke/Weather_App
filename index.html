@@ -9,35 +9,30 @@
   </head>
   <body>
     <form class="change-location">
-      <label for="city">Enter you city</label>
+      <label for="city">Enter Your City</label>
       <div><input type="text" name="city" id="city" /></div>
     </form>
+
     <div class="container fade">
       <div class="container-top">
-        <div class="location">
-          <div class="reg-time">
-            <span id="rg-cn">- , -</span>
-            <span id="curt-day-hour">-- , --</span>
-          </div>
-          <span id="weather-condition">--</span>
-        </div>
-        <div class="weather">
-          <img src="" alt="--" />--
-          <span id="deg">&deg;</span>
-          <span id="celcius"> C </span>
-        </div>
-
-        <div class="precip">
-          <img src="" alt="precip-icon" />
-          <span></span>
+        <div class="loader loaderTop">
+          <img src="./Assets/loader.png" alt="Loading..." />
         </div>
       </div>
 
       <div class="container-bottom">
         <div class="freq">Weekly</div>
-        <div class="items-weeks"></div>
+        <div class="items-weeks">
+          <div class="loader loaderWeek">
+            <img src="./Assets/loader.png" alt="Loading..." />
+          </div>
+        </div>
         <div class="freq">Hourly</div>
-        <div class="items-hours"></div>
+        <div class="items-hours">
+          <div class="loader loaderHour">
+            <img src="./Assets/loader.png" alt="Loading..." />
+          </div>
+        </div>
       </div>
     </div>
   </body>

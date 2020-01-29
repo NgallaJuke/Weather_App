@@ -4,18 +4,55 @@ body {
   padding: 0;
   font-family: "Roboto", sans-serif;
   color: white;
-
+  background-image: url(./blueSky.jpg);
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
 }
+@keyframes fadeOut {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+.loader {
+  position: relative;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader > img {
+  width: 4em;
+}
+
+.loaderTop.hidden {
+  animation: fadeOut 3s;
+  animation-fill-mode: forwards;
+}
+.loaderWeek.hidden {
+  animation: fadeOut 3s;
+  animation-fill-mode: forwards;
+}
+.loaderHour.hidden {
+  animation: fadeOut 3s;
+  animation-fill-mode: forwards;
+}
 
 .change-location {
   padding-bottom: 15px;
-  margin-bottom: 5px;
+  margin: 0.5em 0;
   text-align: center;
 }
 
+.fade {
+  display: none;
+}
 .change-location label {
   font-size: 1.4rem;
   font-weight: bold;
@@ -48,9 +85,7 @@ body {
 
   border: none;
 }
-.fade {
-  display: none;
-}
+
 .container-top {
   position: relative;
   height: 50vh;
@@ -152,6 +187,7 @@ body {
   border-style: solid;
   border-width: 0.05rem;
   border-color: rgba(230, 225, 225, 0.411);
+  border-radius: 10px;
 }
 .item-hour {
   position: relative;
@@ -160,6 +196,7 @@ body {
   border-style: solid;
   border-width: 0.05rem;
   border-color: rgba(230, 225, 225, 0.411);
+  border-radius: 8px;
 }
 .item-hour:hover,
 .item-week:hover {

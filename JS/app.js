@@ -6,14 +6,12 @@ cityForm.addEventListener("submit", e => {
 
   const city = cityForm.city.value.trim();
   cityForm.reset();
-
   updateCurrentWeather(city);
   updateWeeklyWeather(city);
   updateHourlyWeather(city);
 
   if (container.classList.contains("fade")) {
     container.classList.remove("fade");
-    cityForm.classList.add("fade");
   }
   // Set localStorage
   localStorage.setItem("LastCitySearch", city);
@@ -25,6 +23,10 @@ if (localStorage.getItem("LastCitySearch")) {
   updateCurrentWeather(city);
   updateWeeklyWeather(city);
   updateHourlyWeather(city);
+
+  if (container.classList.contains("fade")) {
+    container.classList.remove("fade");
+  }
 }
 
 // item_week.addEventListener("click", e => {});
