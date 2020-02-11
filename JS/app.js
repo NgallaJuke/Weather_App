@@ -14,19 +14,19 @@ cityForm.addEventListener("submit", e => {
     container.classList.remove("fade");
   }
   // Set localStorage
-  localStorage.setItem("LastCitySearch", city);
+  // localStorage.setItem("LastCitySearch", city);
 });
 
 // if localStorage is set then we use it directly
-if (localStorage.getItem("LastCitySearch")) {
-  const city = localStorage.getItem("LastCitySearch");
-  updateCurrentWeather(city);
-  updateWeeklyWeather(city);
-  updateHourlyWeather(city);
+// if (localStorage.getItem("LastCitySearch")) {
+//   const city = localStorage.getItem("LastCitySearch");
+//   updateCurrentWeather(city);
+//   updateWeeklyWeather(city);
+//   updateHourlyWeather(city);
 
-  if (container.classList.contains("fade")) {
-    container.classList.remove("fade");
-  }
-}
+//   if (container.classList.contains("fade")) {
+//     container.classList.remove("fade");
+//   }
+// }
 
 // item_week.addEventListener("click", e => {});

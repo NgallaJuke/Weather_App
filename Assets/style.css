@@ -1,292 +1,240 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
-  color: white;
-  background-image: url(./blueSky.jpg);
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
 }
-@keyframes fadeOut {
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
+.grid {
+  display: grid;
+  grid-gap: 0.2em;
 }
-.loader {
-  position: relative;
-  z-index: 99;
+.flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  height: fit-content;
+}
+/* .overlay {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.loader > img {
-  width: 4em;
-}
-
-.loaderTop.hidden {
-  animation: fadeOut 3s;
-  animation-fill-mode: forwards;
-}
-.loaderWeek.hidden {
-  animation: fadeOut 3s;
-  animation-fill-mode: forwards;
-}
-.loaderHour.hidden {
-  animation: fadeOut 3s;
-  animation-fill-mode: forwards;
-}
-
-.change-location {
-  padding-bottom: 15px;
-  margin: 0.5em 0;
-  text-align: center;
-}
-
-.fade {
-  display: none;
-}
-.change-location label {
-  font-size: 1.4rem;
-  font-weight: bold;
-  text-align: center;
-}
-
-.change-location input {
-  align-items: center;
-  height: 1.2rem;
-  background-color: #ece7e700;
-  padding: 0.3rem;
-  border: 1.5px solid white;
-  border-radius: 1rem;
-  color: white;
-  font-size: 1.5rem;
-  text-align: center;
-}
-
-.change-location input:focus {
-  outline: 0;
-  outline-color: transparent;
-  outline-style: none;
-}
-.container {
-  width: 100%;
-  padding-top: 2em;
-  padding-bottom: 2em;
-  padding-left: 1em;
-  padding-right: 1em;
-
-  border: none;
-}
-
-.container-top {
-  position: relative;
-  height: 50vh;
-
-  border: none;
-}
-.container-bottom {
-  position: relative;
-  border: none;
-}
-#wave1 {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
-#rg-cn {
-  position: relative;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-.reg-time {
-  position: relative;
-}
-#curt-day-hour {
-  display: block;
-  float: right;
-  margin-right: 0.5em;
-}
-#weather-condition {
-  display: block;
-  margin-top: 0.5em;
-  margin-left: 1em;
-}
-.weather {
-  position: absolute;
-  margin-top: 0.3em;
-  font-size: 75px;
-}
-
-#deg {
-  position: absolute;
-  top: 0.2em;
-  font-weight: lighter;
-}
-#celcius {
-  position: absolute;
-  font-size: 3rem;
-  font-weight: bold;
-  top: 3rem;
-  right: -1.2em;
-}
-
-.precip {
-  position: absolute;
-  left: 0;
-  bottom: 0em;
-  margin-left: 1.5em;
-}
-
-.precip span {
-  font-size: 1.5rem;
-}
-.precip img {
-  position: relative;
-  width: 40px;
-}
-
-.freq {
-  position: relative;
-  margin: 1em 0;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-.items-hours {
-  display: flex;
-  overflow-x: auto;
-  justify-content: left;
-  align-items: stretch;
-}
-.items-weeks {
-  display: flex;
-  overflow-x: auto;
-  justify-content: left;
-  align-items: stretch;
-  margin-bottom: 2em;
-}
-.items-hours::-webkit-scrollbar {
-  display: none;
-}
-.items-weeks::-webkit-scrollbar {
-  display: none;
-}
-
-.item-week {
-  position: relative;
-  margin: 10px 5px;
-  padding: 0 5px;
-  border-style: solid;
-  border-width: 0.05rem;
-  border-color: rgba(230, 225, 225, 0.411);
-  border-radius: 10px;
-}
-.item-hour {
-  position: relative;
-  margin: 15px 10px;
-  padding: 0 5px;
-  border-style: solid;
-  border-width: 0.05rem;
-  border-color: rgba(230, 225, 225, 0.411);
-  border-radius: 8px;
-}
-.item-hour:hover,
-.item-week:hover {
-  background-color: #ece7e731;
-  border-style: solid;
-  border-width: 0.05rem;
-  border-color: rgb(255, 255, 255);
-}
-
-/* .item-week::after {
-
+  background: linear-gradient(
+    rgba(149, 116, 240, 0.63),
+    rgba(67, 2, 83, 0.671)
+  );
 } */
-.rowsWheather {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#container {
+  z-index: 1;
 }
-
-.icons-Day-Night {
-  padding: 10px 0 0 5px;
-  margin: 0 10px 0 0;
-}
-.day-In-Week-Cond {
+.app {
   position: relative;
-  top: -20px;
-  font-size: 0.8rem;
+  color: aliceblue;
+  background-image: url(./SkyBlue-Night.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  padding: 0.2em 0.3em;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(7, minmax(fit-content auto));
+  grid-template-areas:
+    "header header header header header "
+    "location location location location location "
+    "current_condition current_condition current_condition current_condition current_condition"
+    "current_condition_info current_condition_info current_condition_info current_condition_info current_condition_info "
+    "hourly_condition hourly_condition hourly_condition hourly_condition hourly_condition "
+    "daily_condition daily_condition daily_condition daily_condition daily_condition"
+    "footer footer footer footer footer ";
 }
-
-.day-temps {
-  margin-top: 5px;
-  font-weight: 500;
-  padding: 10px 0 0 0;
+.header {
+  grid-area: header;
+  border: 1px solid black;
+  background-color: gold;
+  height: fit-content;
+  justify-content: space-between;
 }
-#day-of-week {
-  text-align: left;
-  font-size: 1.2rem;
+.input_search {
+  height: 1.5em;
+  width: 1.5em;
+  border-radius: 0.4em;
 }
-#temp-Min {
-  font-size: 1.1rem;
-  font-weight: 400;
-
-  margin: 0 0 0 10px;
-}
-#temp-Max {
-  font-size: 1.5rem;
-  font-weight: 700;
-
-  margin-left: 5px;
-}
-
-.day-In-Week {
-  margin-top: 5px;
-  text-align: left;
-}
-
-#icon-Day {
-  width: 80px;
-}
-#icon-night {
-  width: 80px;
-}
-.wind-precip {
+.input_search > img {
   position: relative;
-  top: -15px;
-  font-size: 0.8rem;
+  right: -3px;
+  top: 3px;
+  width: 1em;
 }
-.precipMin {
-  width: 20px;
+.option {
+  border: 1px solid black;
+  background-color: rgb(236, 96, 218);
 }
-#icon-Hour {
-  position: relative;
+.day_hour {
+  border: 1px solid black;
+  background-color: rgb(236, 96, 218);
 }
-.time {
-  padding: 0.5rem 0;
+.input_search {
+  border: 1px solid black;
+  background-color: rgb(236, 96, 218);
+  justify-self: flex-end;
+}
+.location {
+  border: 1px solid black;
+  background-color: rgb(241, 225, 131);
+  grid-area: location;
   text-align: center;
-  font-size: 1.2rem;
-}
-.time-weather {
-  font-size: 1.2rem;
+  font-size: 1.8em;
   font-weight: bold;
 }
-
-@media (max-width: 480px) {
-  .body {
-    width: 100%;
-    padding-top: 2em;
-    padding-bottom: 2em;
-    padding-left: 1em;
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
-  }
+.current_condition {
+  border: 1px solid black;
+  background-color: rgb(255, 115, 115);
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-areas:
+    "condition_txt condition_txt condition_txt condition_txt condition_txt"
+    ". current_weather current_weather min_max_up_down ."
+    ". current_weather current_weather min_max_up_down ."
+    ". current_weather current_weather  min_max_up_down .";
+  grid-area: current_condition;
+  justify-content: center;
+}
+.current_condition_info {
+  padding: 0.5em 0;
+  grid-area: current_condition_info;
+  border: 1px solid black;
+  background-color: rgb(164, 241, 91);
+}
+.hourly_condition {
+  grid-area: hourly_condition;
+  border: 1px solid black;
+  background-color: rgb(104, 185, 197);
+}
+.daily_condition {
+  padding: 0.5em 0;
+  grid-area: daily_condition;
+  border: 1px solid black;
+  background-color: rgb(114, 84, 223);
+}
+.footer {
+  border: 1px solid black;
+  background-color: rgb(236, 96, 218);
+  grid-area: footer;
+  font-size: 0.7em;
+  text-align: center;
+}
+.current_weather {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, auto);
+  grid-area: current_weather;
+  grid-gap: 0;
+  border: 1px solid black;
+  background-color: rgb(87, 219, 26);
+  grid-template-areas:
+    "cur_cond_icon cur_cond_temp cur_cond_temp   "
+    "cur_cond_icon cur_cond_temp cur_cond_temp  "
+    ". cur_cond_temp cur_cond_temp  ";
+}
+.min_max_up_down {
+  grid-area: min_max_up_down;
+  border: 1px solid black;
+  background-color: rgb(155, 141, 153);
+  width: fit-content;
+  align-self: center;
+}
+.min_max_daily {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  font-size: 0.8em;
+}
+#maxtemp {
+  border-bottom: 2px solid black;
+}
+.condition_txt {
+  grid-area: condition_txt;
+  border: 1px solid black;
+  background-color: rgb(236, 96, 218);
+  text-align: center;
+  height: fit-content;
+}
+.cur_cond_icon {
+  border: 1px solid black;
+  background-color: rgb(236, 96, 218);
+  width: fit-content;
+  grid-area: cur_cond_icon;
+  justify-self: flex-end;
+}
+.cur_cond_icon > img {
+  height: 3.5em;
+}
+.cur_cond_temp {
+  grid-area: cur_cond_temp;
+  border: 1px solid black;
+  background-color: rgb(236, 96, 218);
+  font-size: 5em;
+}
+.deg_celcuis {
+  grid-area: deg_celcuis;
+  border: 1px solid black;
+  background-color: rgb(236, 96, 218);
+}
+.info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 0.4em;
+  height: fit-content;
+  border-radius: 0.5em;
+  border: 1px solid black;
+  background-color: rgb(236, 96, 218);
+}
+.info_icon {
+  border-radius: 50%;
+  padding: 0.2em;
+  border: 1px solid black;
+  background-color: rgb(96, 192, 236);
+}
+.info_icon > img {
+  width: 1.8em;
+  display: block;
+  margin: auto;
+}
+.daily_icon > img {
+  width: 1.8em;
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+.info_numb {
+  border: 1px solid black;
+  background-color: rgb(138, 96, 236);
+  font-weight: bold;
+  border-radius: 0.3em;
+}
+.day_cond {
+  margin: 0 0.4em;
+  border: 1px solid black;
+  background-color: rgb(236, 96, 96);
+}
+.day {
+  border: 1px solid black;
+  background-color: rgb(247, 193, 78);
+  font-size: 0.8em;
+  text-align: center;
+  font-weight: bold;
+}
+.day_icon {
+  border: 1px solid black;
+  background-color: rgb(245, 175, 175);
+}
+.day_min_max {
+  border: 1px solid black;
+  background-color: rgb(236, 234, 96);
 }

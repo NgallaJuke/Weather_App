@@ -1,13 +1,9 @@
-navigator.geolocation.getCurrentPosition(
-  position => {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    console.log("lat", latitude);
-    console.log("long", longitude);
-  },
-  error => {
-    if (error) {
-      console.log("Daakar ");
-    }
-  }
-);
+getIpInfo = async () => {
+  let response = await fetch("https://ipapi.co/json/");
+  let data = await response.json();
+  console.log("data", data);
+
+  return data;
+};
+
+// getIpInfo().then(data => console.log(data));
