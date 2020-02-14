@@ -23,225 +23,148 @@
     <title>Weather</title>
   </head>
   <body>
-    <div class="app">
-      <div id="container grid ">
-        <div class="header flex">
-          <div class="input_search">
-            <img src="./Assets/search.png" alt="icon" />
+    <div class="app grid ">
+      <div class=" header flex">
+        <div class="input_search menu-btn">
+          <div class="menu-btn__burger"></div>
+        </div>
+        <div class="day_hour">Mon-12h30</div>
+
+        <button class="input_search">
+          <img src="./Assets/search.svg" alt="icon" />
+        </button>
+      </div>
+      <div class="location">Dakar, SN</div>
+      <div class="current_condition grid">
+        <div class="condition_txt">Clear Sky</div>
+        <div class="current_weather grid">
+          <div class="cur_cond_icon">
+            <img src="./Assets/icons/1.svg" alt="icon" />
           </div>
-          <div class="day_hour">Mon,12h30</div>
-          <div class="input_search">
-            <img src="./Assets/search.png" alt="icon" />
+          <div class="cur_cond_temp">
+            00<span id="deg">&deg;</span><span id="celcius">c</span>
           </div>
         </div>
-        <div class="location ">Dakar</div>
-        <div class="current_condition grid">
-          <div class="condition_txt">Synny</div>
-          <div class="current_weather grid">
-            <div class="cur_cond_icon">
-              <img src="./Assets/icons-day/1.svg" alt="icon" />
-            </div>
-            <div class="cur_cond_temp">99&deg;c</div>
+        <div class="min_max_up_down">
+          <div class="min_man_temp">
+            <div class="maxtemp">45&deg;C</div>
+            <div id="mintemp">15&deg;C</div>
           </div>
-          <div class="min_max_up_down">
-            <div id="maxtemp">45&deg;C</div>
+          <div class="sun">
+            <div class="sun_pos">
+              <img src="./Assets/sunrise.svg" alt="icon" />
+              <div class="sunset_time">0h</div>
+            </div>
+            <div class="sun_pos">
+              <img src="./Assets/sunset.svg" alt="icon" />
+              <div class="sunset_time">0h</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="current_condition_info flex">
+        <div class="info">
+          <div class="info_icon">
+            <img src="./Assets/precip.svg" alt="icon" />
+          </div>
+          <div class="info_numb">100%</div>
+        </div>
+        <div class="info">
+          <div class="info_icon">
+            <img src="./Assets/wind.svg" alt="icon" />
+          </div>
+          <div class="info_numb">30m/s</div>
+        </div>
+        <div class="info">
+          <div class="info_icon">
+            <img src="./Assets/humidity.svg" alt="icon" />
+          </div>
+          <div class="info_numb">100%</div>
+        </div>
+
+        <div class="info">
+          <div class="info_icon">
+            <img src="./Assets/barometer.svg" alt="icon" />
+          </div>
+          <div class="info_numb">100hPa</div>
+        </div>
+      </div>
+      <div class="hourly_condition"><canvas id="myChart"></canvas></div>
+      <div class="daily_condition flex">
+        <div class="day_cond">
+          <div class="day">Mon</div>
+          <div class="daily_icon">
+            <img src="./Assets/icons/1.svg" alt="icon" />
+          </div>
+          <div class="min_max_up_down min_max_daily">
+            <div class="maxtemp maxtemp_daily">45&deg;C</div>
             <div id="mintemp">18&deg;C</div>
           </div>
         </div>
-        <div class="current_condition_info flex">
-          <div class="info">
-            <div class="info_icon">
-              <img src="./Assets/precip.svg" alt="icon" />
-            </div>
-            <div class="info_numb">100%</div>
+        <div class="day_cond">
+          <div class="day">Mon</div>
+          <div class="daily_icon">
+            <img src="./Assets/icons/1.svg" alt="icon" />
           </div>
-          <div class="info">
-            <div class="info_icon">
-              <img src="./Assets/precip.svg" alt="icon" />
-            </div>
-            <div class="info_numb">30m/s</div>
-          </div>
-          <div class="info">
-            <div class="info_icon">
-              <img src="./Assets/precip.svg" alt="icon" />
-            </div>
-            <div class="info_numb">100%</div>
-          </div>
-          <div class="info">
-            <div class="info_icon">
-              <img src="./Assets/precip.svg" alt="icon" />
-            </div>
-            <div class="info_numb">7H</div>
-          </div>
-          <div class="info">
-            <div class="info_icon">
-              <img src="./Assets/precip.svg" alt="icon" />
-            </div>
-            <div class="info_numb">19H</div>
+          <div class="min_max_up_down min_max_daily">
+            <div class="maxtemp maxtemp_daily">45&deg;C</div>
+            <div id="mintemp">18&deg;C</div>
           </div>
         </div>
-        <div class="hourly_condition"><canvas id="myChart"></canvas></div>
-        <div class="daily_condition flex">
-          <div class="day_cond">
-            <div class="day">Mon</div>
-            <div class="daily_icon">
-              <img src="./Assets/icons/1.svg" alt="icon" />
-            </div>
-            <div class="min_max_up_down min_max_daily">
-              <div id="maxtemp">45&deg;C</div>
-              <div id="mintemp">18&deg;C</div>
-            </div>
+        <div class="day_cond">
+          <div class="day">Mon</div>
+          <div class="daily_icon">
+            <img src="./Assets/icons/1.svg" alt="icon" />
           </div>
-          <div class="day_cond">
-            <div class="day">Mon</div>
-            <div class="daily_icon">
-              <img src="./Assets/icons/1.svg" alt="icon" />
-            </div>
-            <div class="min_max_up_down min_max_daily">
-              <div id="maxtemp">45&deg;C</div>
-              <div id="mintemp">18&deg;C</div>
-            </div>
-          </div>
-          <div class="day_cond">
-            <div class="day">Mon</div>
-            <div class="daily_icon">
-              <img src="./Assets/icons/1.svg" alt="icon" />
-            </div>
-            <div class="min_max_up_down min_max_daily">
-              <div id="maxtemp">45&deg;C</div>
-              <div id="mintemp">18&deg;C</div>
-            </div>
-          </div>
-          <div class="day_cond">
-            <div class="day">Mon</div>
-            <div class="daily_icon">
-              <img src="./Assets/icons/1.svg" alt="icon" />
-            </div>
-            <div class="min_max_up_down min_max_daily">
-              <div id="maxtemp">45&deg;C</div>
-              <div id="mintemp">18&deg;C</div>
-            </div>
-          </div>
-          <div class="day_cond">
-            <div class="day">Mon</div>
-            <div class="daily_icon">
-              <img src="./Assets/icons/1.svg" alt="icon" />
-            </div>
-            <div class="min_max_up_down min_max_daily ">
-              <div id="maxtemp">45&deg;C</div>
-              <div id="mintemp">18&deg;C</div>
-            </div>
-          </div>
-          <div class="day_cond">
-            <div class="day">Mon</div>
-            <div class="daily_icon">
-              <img src="./Assets/icons/1.svg" alt="icon" />
-            </div>
-            <div class="min_max_up_down min_max_daily">
-              <div id="maxtemp">45&deg;C</div>
-              <div id="mintemp">18&deg;C</div>
-            </div>
-          </div>
-          <div class="day_cond">
-            <div class="day">Mon</div>
-            <div class="daily_icon">
-              <img src="./Assets/icons/1.svg" alt="icon" />
-            </div>
-            <div class="min_max_up_down min_max_daily">
-              <div id="maxtemp">45&deg;C</div>
-              <div id="mintemp">18&deg;C</div>
-            </div>
+          <div class="min_max_up_down min_max_daily">
+            <div class="maxtemp maxtemp_daily">45&deg;C</div>
+            <div id="mintemp">18&deg;C</div>
           </div>
         </div>
-        <footer class="footer">Credit: AccuweatherAPI - OceanWeatherAPI</footer>
+        <div class="day_cond">
+          <div class="day">Mon</div>
+          <div class="daily_icon">
+            <img src="./Assets/icons/1.svg" alt="icon" />
+          </div>
+          <div class="min_max_up_down min_max_daily">
+            <div class="maxtemp maxtemp_daily">45&deg;C</div>
+            <div id="mintemp">18&deg;C</div>
+          </div>
+        </div>
+        <div class="day_cond">
+          <div class="day">Mon</div>
+          <div class="daily_icon">
+            <img src="./Assets/icons/1.svg" alt="icon" />
+          </div>
+          <div class="min_max_up_down min_max_daily ">
+            <div class="maxtemp maxtemp_daily">45&deg;C</div>
+            <div id="mintemp">18&deg;C</div>
+          </div>
+        </div>
+        <div class="day_cond">
+          <div class="day">Mon</div>
+          <div class="daily_icon">
+            <img src="./Assets/icons/1.svg" alt="icon" />
+          </div>
+          <div class="min_max_up_down min_max_daily">
+            <div class="maxtemp maxtemp_daily">45&deg;C</div>
+            <div id="mintemp">18&deg;C</div>
+          </div>
+        </div>
+        <div class="day_cond">
+          <div class="day">Mon</div>
+          <div class="daily_icon">
+            <img src="./Assets/icons/1.svg" alt="icon" />
+          </div>
+          <div class="min_max_up_down min_max_daily">
+            <div class="maxtemp maxtemp_daily">45&deg;C</div>
+            <div id="mintemp">18&deg;C</div>
+          </div>
+        </div>
       </div>
-      <div class="overlay"></div>
+      <footer class="footer">Credit: AccuweatherAPI - OceanWeatherAPI</footer>
     </div>
-    <script>
-      var ctx = document.getElementById("myChart").getContext("2d");
-      var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: "line",
-
-        // The data for our dataset
-        data: {
-          labels: ["12h", "12h", "12h", "12h", "12h", "12h", "12h"],
-          datasets: [
-            {
-              label: "My First dataset",
-              backgroundColor: "rgba(0, 0, 132,0.5)",
-              borderColor: "rgb(255, 255, 255)",
-              boderWidth: 2,
-              data: [0, 10, 5, 45, 20, 30, 60]
-            }
-          ]
-        },
-
-        // Configuration options go here
-        options: {
-          legend: {
-            display: false
-          },
-          layout: {
-            padding: {
-              left: -20,
-              right: 0,
-              top: 20,
-              bottom: -5
-            }
-          },
-          scales: {
-            xAxes: [
-              {
-                gridLines: {
-                  color: "rgba(0, 0, 0, 0)"
-                }
-              }
-            ],
-            yAxes: [
-              {
-                gridLines: {
-                  color: "rgba(0, 0, 0, 0)"
-                },
-                ticks: {
-                  display: false
-                }
-              }
-            ]
-          },
-          hover: {
-            animationDuration: 0
-          },
-          animation: {
-            duration: 2000,
-            onComplete: function() {
-              var chartInstance = this.chart,
-                ctx = chartInstance.ctx;
-              ctx.font = Chart.helpers.fontString(
-                Chart.defaults.global.defaultFontSize,
-                Chart.defaults.global.defaultFontStyle,
-                Chart.defaults.global.defaultFontFamily
-              );
-              ctx.textAlign = "center";
-              ctx.textBaseline = "bottom";
-
-              this.data.datasets.forEach(function(dataset, i) {
-                var meta = chartInstance.controller.getDatasetMeta(i);
-                meta.data.forEach(function(bar, index) {
-                  var data = dataset.data[index];
-                  ctx.fillText(data, bar._model.x, bar._model.y - 5);
-                });
-              });
-            }
-          }
-        }
-      });
-
-      let c = { greeting: "hey" };
-      let d;
-      d = c;
-      c.greeting = "yooo";
-      console.log(d.greeting);
-    </script>
+    <div class="overlay"></div>
+    <script src="./JS/graph.js"></script>
   </body>
 </html>

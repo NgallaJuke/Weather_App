@@ -1,11 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,400,700&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   padding: 0;
+  background-image: url(./SkyBlue-Night.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .grid {
   display: grid;
@@ -17,29 +22,21 @@ body {
   align-items: flex-start;
   height: fit-content;
 }
-/* .overlay {
+.overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    rgba(149, 116, 240, 0.63),
-    rgba(67, 2, 83, 0.671)
-  );
-} */
-#container {
-  z-index: 1;
+  height: 100vh;
+  background: linear-gradient(rgba(71, 124, 223, 0.603), rgba(7, 3, 56, 0.692));
 }
+
 .app {
   position: relative;
   color: aliceblue;
-  background-image: url(./SkyBlue-Night.jpeg);
-  background-size: cover;
-  background-repeat: no-repeat;
   width: 100%;
   height: 100vh;
-  padding: 0.2em 0.3em;
+  padding: 0.2em 0;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(7, minmax(fit-content auto));
   grid-template-areas:
@@ -50,138 +47,234 @@ body {
     "hourly_condition hourly_condition hourly_condition hourly_condition hourly_condition "
     "daily_condition daily_condition daily_condition daily_condition daily_condition"
     "footer footer footer footer footer ";
+  z-index: 1;
 }
 .header {
+  padding: 0 0.3em;
   grid-area: header;
-  border: 1px solid black;
-  background-color: gold;
   height: fit-content;
   justify-content: space-between;
 }
 .input_search {
-  height: 1.5em;
-  width: 1.5em;
-  border-radius: 0.4em;
+  position: relative;
+  height: 1.9em;
+  width: 1.9em;
+  border: 1px solid rgba(255, 255, 255, 0.507);
+  background: none;
+  border-radius: 50%;
+  cursor: pointer;
 }
+.input_search:focus {
+  outline: none;
+}
+
 .input_search > img {
   position: relative;
-  right: -3px;
-  top: 3px;
-  width: 1em;
-}
-.option {
-  border: 1px solid black;
-  background-color: rgb(236, 96, 218);
-}
-.day_hour {
-  border: 1px solid black;
-  background-color: rgb(236, 96, 218);
+  top: 0.1em;
+  width: 1.2em;
 }
 .input_search {
-  border: 1px solid black;
-  background-color: rgb(236, 96, 218);
   justify-self: flex-end;
 }
+.input_search:focus {
+  background-color: rgba(202, 228, 250, 0.39);
+}
+/* -----START Menu Botton -------*/
+.menu-btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.9em;
+  height: 1.9em;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  /* border: 3px solid #fff; */
+}
+.menu-btn__burger {
+  width: 1em;
+  height: 0.2em;
+  background: #fff;
+  border-radius: 5px;
+
+  transition: all 0.5s ease-in-out;
+}
+.menu-btn__burger::before,
+.menu-btn__burger::after {
+  content: "";
+  position: absolute;
+  width: 1em;
+  height: 0.2em;
+  background: #fff;
+  border-radius: 5px;
+
+  transition: all 0.5s ease-in-out;
+}
+.menu-btn__burger::before {
+  transform: translateY(-0.4em);
+}
+.menu-btn__burger::after {
+  transform: translateY(0.4em);
+}
+/* ANIMATION */
+.menu-btn.open .menu-btn__burger {
+  transform: translateX(-50px);
+  background: transparent;
+  box-shadow: none;
+}
+.menu-btn.open .menu-btn__burger::before {
+  transform: rotate(45deg) translate(35px, -35px);
+}
+.menu-btn.open .menu-btn__burger::after {
+  transform: rotate(-45deg) translate(35px, 35px);
+}
+/* -----END Menu Botton -------*/
+
+.day_hour {
+  margin-top: 0.1em;
+  font-size: 0.8em;
+  color: rgba(255, 255, 255, 0.644);
+}
+
 .location {
-  border: 1px solid black;
-  background-color: rgb(241, 225, 131);
   grid-area: location;
   text-align: center;
-  font-size: 1.8em;
+  font-size: 2em;
   font-weight: bold;
 }
 .current_condition {
-  border: 1px solid black;
-  background-color: rgb(255, 115, 115);
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(4, 1fr);
   grid-template-areas:
     "condition_txt condition_txt condition_txt condition_txt condition_txt"
-    ". current_weather current_weather min_max_up_down ."
-    ". current_weather current_weather min_max_up_down ."
-    ". current_weather current_weather  min_max_up_down .";
+    "current_weather current_weather current_weather min_max_up_down min_max_up_down"
+    "current_weather current_weather current_weather min_max_up_down min_max_up_down"
+    "current_weather current_weather current_weather min_max_up_down min_max_up_down";
   grid-area: current_condition;
   justify-content: center;
 }
 .current_condition_info {
   padding: 0.5em 0;
   grid-area: current_condition_info;
-  border: 1px solid black;
-  background-color: rgb(164, 241, 91);
+}
+#celcius {
+  position: relative;
+  left: -10px;
+  top: -5px;
+  font-size: 0.7em;
+}
+#deg {
+  position: relative;
+  top: -0.1em;
+  left: -0.15em;
+  font-size: 1em;
+  font-weight: 10;
+  margin-left: 0.1em;
 }
 .hourly_condition {
   grid-area: hourly_condition;
-  border: 1px solid black;
-  background-color: rgb(104, 185, 197);
 }
 .daily_condition {
+  background-color: rgba(202, 228, 250, 0.2);
   padding: 0.5em 0;
   grid-area: daily_condition;
-  border: 1px solid black;
-  background-color: rgb(114, 84, 223);
 }
 .footer {
-  border: 1px solid black;
-  background-color: rgb(236, 96, 218);
   grid-area: footer;
   font-size: 0.7em;
   text-align: center;
+  position: absolute;
+  bottom: 0;
+  justify-self: center;
+  color: rgba(255, 255, 255, 0.301);
 }
 .current_weather {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, auto);
   grid-area: current_weather;
   grid-gap: 0;
-  border: 1px solid black;
-  background-color: rgb(87, 219, 26);
   grid-template-areas:
-    "cur_cond_icon cur_cond_temp cur_cond_temp   "
+    ". cur_cond_temp cur_cond_temp   "
     "cur_cond_icon cur_cond_temp cur_cond_temp  "
     ". cur_cond_temp cur_cond_temp  ";
 }
 .min_max_up_down {
+  padding-top: 0.5em;
   grid-area: min_max_up_down;
-  border: 1px solid black;
-  background-color: rgb(155, 141, 153);
+  position: relative;
   width: fit-content;
+  margin-left: 1em;
   align-self: center;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  color: rgba(255, 255, 255, 0.644);
+  background-color: rgba(202, 228, 250, 0.09);
+  border-radius: 0.5em;
+  text-align: center;
+}
+.min_man_temp {
+  justify-self: center;
+  align-self: center;
+}
+.sun {
+  grid-area: sun;
+  display: flex;
+}
+.sun_pos > img {
+  width: 2.5em;
+}
+.sunset_time {
+  position: relative;
+  top: -0.6em;
+
+  font-size: 0.8em;
+}
+#mintemp {
+  margin-top: 0.2em;
 }
 .min_max_daily {
   margin: 0 auto;
   width: 100%;
   text-align: center;
-  font-size: 0.8em;
+  font-size: 0.7em;
+  color: white;
+  background-color: transparent;
 }
-#maxtemp {
-  border-bottom: 2px solid black;
+.maxtemp {
+  border-bottom: 3px solid white;
+  border-color: rgba(255, 255, 255, 0.644);
 }
+.maxtemp_daily {
+  border-bottom: 1px solid white;
+  border-color: rgba(255, 255, 255, 0.644);
+}
+
 .condition_txt {
+  position: relative;
+  top: -0.5em;
   grid-area: condition_txt;
-  border: 1px solid black;
-  background-color: rgb(236, 96, 218);
   text-align: center;
   height: fit-content;
+  font-size: 1.2em;
+  font-weight: 100;
 }
 .cur_cond_icon {
-  border: 1px solid black;
-  background-color: rgb(236, 96, 218);
   width: fit-content;
   grid-area: cur_cond_icon;
   justify-self: flex-end;
 }
 .cur_cond_icon > img {
-  height: 3.5em;
+  height: 5em;
 }
 .cur_cond_temp {
   grid-area: cur_cond_temp;
-  border: 1px solid black;
-  background-color: rgb(236, 96, 218);
   font-size: 5em;
 }
 .deg_celcuis {
   grid-area: deg_celcuis;
-  border: 1px solid black;
-  background-color: rgb(236, 96, 218);
 }
 .info {
   flex-grow: 1;
@@ -192,14 +285,11 @@ body {
   margin: 0 0.4em;
   height: fit-content;
   border-radius: 0.5em;
-  border: 1px solid black;
-  background-color: rgb(236, 96, 218);
+  background-color: rgba(202, 228, 250, 0.09);
 }
 .info_icon {
   border-radius: 50%;
   padding: 0.2em;
-  border: 1px solid black;
-  background-color: rgb(96, 192, 236);
 }
 .info_icon > img {
   width: 1.8em;
@@ -213,28 +303,15 @@ body {
   margin: auto;
 }
 .info_numb {
-  border: 1px solid black;
-  background-color: rgb(138, 96, 236);
   font-weight: bold;
-  border-radius: 0.3em;
+  font-size: 0.8em;
+  border-radius: 0.5em;
 }
 .day_cond {
   margin: 0 0.4em;
-  border: 1px solid black;
-  background-color: rgb(236, 96, 96);
 }
 .day {
-  border: 1px solid black;
-  background-color: rgb(247, 193, 78);
   font-size: 0.8em;
   text-align: center;
   font-weight: bold;
-}
-.day_icon {
-  border: 1px solid black;
-  background-color: rgb(245, 175, 175);
-}
-.day_min_max {
-  border: 1px solid black;
-  background-color: rgb(236, 234, 96);
 }
