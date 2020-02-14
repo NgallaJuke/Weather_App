@@ -106,12 +106,18 @@ let chart = new Chart(ctx, {
 });
 
 const menuBtn = document.querySelector(".menu-btn");
+const fade = document.querySelector(".sidebar");
 let menuOpen = false;
 menuBtn.addEventListener("click", () => {
+  // toggle the button hunberger to cross Sign
   if (!menuOpen) {
+    // state is hunberger button
+    fade.classList.remove("fade");
     menuBtn.classList.add("open");
     menuOpen = true;
   } else {
+    // state is Cross button
+    fade.classList.add("fade");
     menuBtn.classList.remove("open");
     menuOpen = false;
   }
