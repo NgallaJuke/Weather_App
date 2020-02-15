@@ -84,7 +84,7 @@ let chart = new Chart(ctx, {
       animationDuration: 0
     },
     animation: {
-      duration: 1000,
+      duration: 1800,
       onComplete: function() {
         let chartInstance = this.chart,
           ctx = chartInstance.ctx;
@@ -115,6 +115,7 @@ const btn_search = document.querySelector(".btn_search");
 const btn_option = document.querySelector(".btn_option");
 const sidebar = document.querySelector(".sidebar");
 const sidebar_right = document.querySelector(".sidebar_right");
+const current_condition = document.querySelector(".current_condition");
 
 let menuOpen = false;
 let menuSearch = false;
@@ -123,7 +124,6 @@ menuBtn.addEventListener("click", () => {
   // toggle the button hunberger to cross Sign
   if (!menuOpen) {
     // state is hunberger button
-    sidebar_right.classList.add("fade");
     btn_search.classList.add("fade");
 
     sidebar.classList.add("active");
@@ -131,7 +131,7 @@ menuBtn.addEventListener("click", () => {
     menuOpen = true;
   } else {
     // state is Cross button
-    sidebar_right.classList.remove("fade");
+
     btn_search.classList.remove("fade");
     sidebar.classList.remove("active");
     menuBtn.classList.remove("open");
