@@ -1,3 +1,4 @@
+/* Start Chart.js */
 let ctx = document.getElementById("myChart").getContext("2d");
 var gradient = ctx.createLinearGradient(0, 0, 0, 400);
 gradient.addColorStop(0, "rgba(255,255,255,0.5)");
@@ -105,20 +106,69 @@ let chart = new Chart(ctx, {
   }
 });
 
+/* End Chart.js */
+
+/* Start Sidebars toggle  */
+
 const menuBtn = document.querySelector(".menu-btn");
-const fade = document.querySelector(".sidebar");
+const btn_search = document.querySelector(".btn_search");
+const btn_option = document.querySelector(".btn_option");
+const sidebar = document.querySelector(".sidebar");
+const sidebar_right = document.querySelector(".sidebar_right");
+
 let menuOpen = false;
+let menuSearch = false;
+
 menuBtn.addEventListener("click", () => {
   // toggle the button hunberger to cross Sign
   if (!menuOpen) {
     // state is hunberger button
-    fade.classList.remove("fade");
+    sidebar_right.classList.add("fade");
+    btn_search.classList.add("fade");
+
+    sidebar.classList.add("active");
     menuBtn.classList.add("open");
     menuOpen = true;
   } else {
     // state is Cross button
-    fade.classList.add("fade");
+    sidebar_right.classList.remove("fade");
+    btn_search.classList.remove("fade");
+    sidebar.classList.remove("active");
     menuBtn.classList.remove("open");
+
     menuOpen = false;
   }
 });
+
+// right button search
+
+btn_search.addEventListener("click", () => {
+  if (!menuSearch) {
+    // state is hunberger button
+    sidebar_right.style.display = "block";
+    sidebar_right.classList.add("active");
+    btn_option.classList.add("fade");
+
+    menuSearch = true;
+  } else {
+    // state is Cross button
+    sidebar_right.classList.remove("active");
+    sidebar_right.style.display = "none";
+    btn_option.classList.remove("fade");
+
+    menuSearch = false;
+  }
+});
+/* End Sidebars toggle  */
+
+/* Start Loader  */
+document.onreadystatechange = function() {
+  if (document.readyState !== "complete") {
+    document.querySelector(".app").style.visibility = "hidden";
+    document.querySelector("#loader").style.visibility = "visible";
+  } else {
+    document.querySelector("#loader").style.display = "none";
+    document.querySelector(".app").style.visibility = "visible";
+  }
+};
+/* End Lodaer  */

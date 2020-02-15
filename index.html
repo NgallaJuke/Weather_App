@@ -23,8 +23,9 @@
     <title>Weather</title>
   </head>
   <body>
+    <div id="loader" class="center"></div>
     <div class="app grid ">
-      <div class="sidebar fade">
+      <div class="sidebar">
         <input
           type="text"
           name="set_city"
@@ -40,15 +41,26 @@
           </ul>
         </div>
       </div>
+      <div class="sidebar_right fade">
+        <input
+          type="text"
+          name="search_city"
+          id="search_city"
+          placeholder="Search City"
+        />
+      </div>
       <div class=" header flex">
-        <div class="input_search menu-btn">
+        <div class="input_search menu-btn btn_option">
           <div class="menu-btn__burger"></div>
         </div>
         <div class="day_hour">Mon-12h30</div>
 
-        <button class="input_search">
+        <div class="input_search menu-btn btn_search">
+          <img class="menu-btn__search" src="./Assets/search.svg" alt="icon" />
+        </div>
+        <!-- <button class="input_search">
           <img src="./Assets/search.svg" alt="icon" />
-        </button>
+        </button> -->
       </div>
       <div class="location">Dakar, SN</div>
       <div class="current_condition grid">
@@ -181,6 +193,7 @@
       <footer class="footer">Credit: AccuweatherAPI - OceanWeatherAPI</footer>
     </div>
     <div class="overlay"></div>
+    <script src="./JS/graph.js"></script>
     <script src="./JS/graph.js"></script>
   </body>
 </html>

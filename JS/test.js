@@ -6,4 +6,4 @@ getIpInfo = async () => {
   return data;
 };
 
-// getIpInfo().then(data => console.log(data));
+getIpInfo().then(data => console.log(data));
