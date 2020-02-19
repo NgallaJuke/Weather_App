@@ -84,7 +84,7 @@ let chart = new Chart(ctx, {
       animationDuration: 0
     },
     animation: {
-      duration: 1800,
+      duration: 2000,
       onComplete: function() {
         let chartInstance = this.chart,
           ctx = chartInstance.ctx;
@@ -162,13 +162,30 @@ btn_search.addEventListener("click", () => {
 /* End Sidebars toggle  */
 
 /* Start Loader  */
-document.onreadystatechange = function() {
-  if (document.readyState !== "complete") {
-    document.querySelector(".app").style.visibility = "hidden";
-    document.querySelector("#loader").style.visibility = "visible";
-  } else {
-    document.querySelector("#loader").style.display = "none";
-    document.querySelector(".app").style.visibility = "visible";
+window.onload = event => {
+  function onReady(callback) {
+    var intervalId = window.setInterval(function() {
+      if (document.getElementsByTagName("body")[0] !== undefined) {
+        window.clearInterval(intervalId);
+        callback.call(this);
+      }
+      console.log(event.timeStamp);
+    }, event.timeStamp);
   }
+
+  function setVisible(selector, visible) {
+    const select = document.querySelector(selector);
+    if (visible) {
+      select.classList.remove("fade");
+    } else {
+      select.classList.add("fade");
+    }
+  }
+
+  onReady(function() {
+    setVisible(".app", true);
+    setVisible(".loading", false);
+  });
 };
+
 /* End Lodaer  */

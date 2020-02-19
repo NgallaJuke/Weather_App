@@ -6,6 +6,7 @@
 }
 /* Start Loader */
 
+/* 
 #loader {
   border: 12px solid #f3f3f3;
   border-radius: 50%;
@@ -28,7 +29,7 @@
   left: 0;
   right: 0;
   margin: auto;
-}
+} */
 /*  End Lodaer */
 body {
   margin: 0;
@@ -159,6 +160,44 @@ body {
     "daily_condition daily_condition daily_condition daily_condition daily_condition"
     "footer footer footer footer footer ";
 }
+
+/* #loading {
+  border: 12px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 12px solid #444444;
+  width: 70px;
+  height: 70px;
+  animation: spin 1s linear infinite;
+}
+.center {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+} */
+.loading {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+
+  background-image: url("./loader.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.fade {
+  display: none;
+}
 .header {
   padding: 0 0.3em;
   grid-area: header;
@@ -259,9 +298,9 @@ body {
   grid-template-rows: repeat(4, 1fr);
   grid-template-areas:
     "condition_txt condition_txt condition_txt condition_txt condition_txt"
-    "current_weather current_weather current_weather min_max_up_down min_max_up_down"
-    "current_weather current_weather current_weather min_max_up_down min_max_up_down"
-    "current_weather current_weather current_weather min_max_up_down min_max_up_down";
+    "current_weather current_weather current_weather . min_max_up_down"
+    "current_weather current_weather current_weather . min_max_up_down"
+    "current_weather current_weather current_weather . min_max_up_down";
   grid-area: current_condition;
   justify-content: center;
   z-index: -1;
@@ -319,7 +358,7 @@ body {
   grid-area: min_max_up_down;
   position: relative;
   width: fit-content;
-  margin-left: 1em;
+  margin: 0 0.5em;
   align-self: center;
   justify-self: center;
   display: flex;
@@ -431,8 +470,4 @@ body {
   font-size: 0.8em;
   text-align: center;
   font-weight: bold;
-}
-
-.fade {
-  display: none;
 }

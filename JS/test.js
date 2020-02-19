@@ -1,9 +1,3 @@
-getIpInfo = async () => {
-  let response = await fetch("https://ipapi.co/json/");
-  let data = await response.json();
-  console.log("data", data);
+const sunrise = new Date(1582097547 * 1000);
 
-  return data;
-};
-
-getIpInfo().then(data => console.log(data));
+console.log("sunrise", sunrise.getHours(), sunrise.getMinutes());

@@ -11,20 +11,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <title>Weather App SN</title>
   </head>
-  <body></body>
+  
 </html>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <style src="./Assets/style.css"></style>
-    <title>Weather</title>
-  </head>
+
   <body>
-    <div id="loader" class="center"></div>
-    <div class="app grid ">
+    <div class="loading center"></div>
+    <div class="app grid fade ">
       <div class="sidebar">
         <input
           type="text"
@@ -53,73 +45,23 @@
         <div class="input_search menu-btn btn_option">
           <div class="menu-btn__burger"></div>
         </div>
-        <div class="day_hour">Mon-12h30</div>
+        <div class="day_hour"></div>
 
         <div class="input_search menu-btn btn_search">
           <img class="menu-btn__search" src="./Assets/search.svg" alt="icon" />
         </div>
-        <!-- <button class="input_search">
-          <img src="./Assets/search.svg" alt="icon" />
-        </button> -->
+        
       </div>
-      <div class="location">Dakar, SN</div>
+      <div class="location"></div>
       <div class="current_condition grid">
-        <div class="condition_txt">Clear Sky</div>
-        <div class="current_weather grid">
-          <div class="cur_cond_icon">
-            <img src="./Assets/icons/1.svg" alt="icon" />
-          </div>
-          <div class="cur_cond_temp">
-            00<span id="deg">&deg;</span><span id="celcius">c</span>
-          </div>
-        </div>
-        <div class="min_max_up_down">
-          <div class="min_man_temp">
-            <div class="maxtemp">45&deg;C</div>
-            <div id="mintemp">15&deg;C</div>
-          </div>
-          <div class="sun">
-            <div class="sun_pos">
-              <img src="./Assets/sunrise.svg" alt="icon" />
-              <div class="sunset_time">0h</div>
-            </div>
-            <div class="sun_pos">
-              <img src="./Assets/sunset.svg" alt="icon" />
-              <div class="sunset_time">0h</div>
-            </div>
-          </div>
-        </div>
+     
       </div>
       <div class="current_condition_info flex">
-        <div class="info">
-          <div class="info_icon">
-            <img src="./Assets/precip.svg" alt="icon" />
-          </div>
-          <div class="info_numb">100%</div>
-        </div>
-        <div class="info">
-          <div class="info_icon">
-            <img src="./Assets/wind.svg" alt="icon" />
-          </div>
-          <div class="info_numb">30m/s</div>
-        </div>
-        <div class="info">
-          <div class="info_icon">
-            <img src="./Assets/humidity.svg" alt="icon" />
-          </div>
-          <div class="info_numb">100%</div>
-        </div>
-
-        <div class="info">
-          <div class="info_icon">
-            <img src="./Assets/barometer.svg" alt="icon" />
-          </div>
-          <div class="info_numb">100hPa</div>
-        </div>
+        
       </div>
       <div class="hourly_condition"><canvas id="myChart"></canvas></div>
       <div class="daily_condition flex">
-        <div class="day_cond">
+        <!-- <div class="day_cond">
           <div class="day">Mon</div>
           <div class="daily_icon">
             <img src="./Assets/icons/1.svg" alt="icon" />
@@ -188,12 +130,13 @@
             <div class="maxtemp maxtemp_daily">45&deg;C</div>
             <div id="mintemp">18&deg;C</div>
           </div>
-        </div>
+        </div> -->
       </div>
       <footer class="footer">Credit: AccuweatherAPI - OceanWeatherAPI</footer>
     </div>
     <div class="overlay"></div>
-    <script src="./JS/graph.js"></script>
-    <script src="./JS/graph.js"></script>
+    <!-- <script src="./JS/graph.js"></script> -->
+    <script src="./JS/forcast.js"></script>
+    <script src="./JS/ui.js"></script>
   </body>
 </html>
