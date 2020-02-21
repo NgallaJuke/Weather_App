@@ -1,3 +1,28 @@
+window.onload = event => {
+  function onReady(callback) {
+    var intervalId = window.setInterval(function() {
+      if (document.getElementsByTagName("body")[0] !== undefined) {
+        window.clearInterval(intervalId);
+        callback.call(this);
+      }
+      console.log(event.timeStamp);
+    }, event.timeStamp);
+  }
+
+  function setVisible(selector, visible) {
+    const select = document.querySelector(selector);
+    if (visible) {
+      select.classList.remove("fade");
+    } else {
+      select.classList.add("fade");
+    }
+  }
+
+  onReady(function() {
+    setVisible(".app", true);
+    setVisible(".loading", false);
+  });
+};
 const day_hour = document.querySelector(".day_hour");
 const locat = document.querySelector(".location");
 const current_condition = document.querySelector(".current_condition");
@@ -29,9 +54,44 @@ gradient.addColorStop(1, "rgba(0,0,0,0)");
 
 let isDayTime = Boolean; //Check if it is dayTime or nighTtime
 let srcIcons = "./Assets/icons";
-
+let sunrise = "sunrise";
+let sunset = "sunset";
 let icon = "day.Night.Icon";
+let humidity = "humidity";
+let precip = "precip";
+let wind = "wind";
+let pressure = "barometer";
+let colors = "rgb(255,255,255)";
 
+const updateColorText = () => {
+  if (isDayTime) {
+    document.querySelector(".app").style.color = "black";
+    document.querySelector(".app").style.color = "black";
+    document.querySelector(".condition_txt").style.color = "black";
+    document.querySelector("body").style.backgroundImage =
+      "url('../Assets/DayWind.jpg')";
+    day_hour.style.color = "black";
+
+    /* icons */
+    srcIcons = "./Assets/icons-day";
+    icon = "day.Day.Icon";
+    sunrise = "sunrise_black";
+    sunset = "sunset_black";
+    humidity = "humidity_black";
+    precip = "precip_black";
+    wind = "wind_black";
+    pressure = "barometer_black";
+    colors = "rgb(0,0,0)";
+    document.documentElement.style.setProperty(
+      "--main-day-backgroud-color",
+      "rgba(0, 0, 0, 0.1)"
+    );
+  } else {
+    daily_condition.style.color = "white";
+    document.querySelector("body").style.backgroundImage =
+      "url('../Assets/Skyblue-mobile.jpeg')";
+  }
+};
 const updateCurrentWeatherUI = async () => {
   const cityDetails = await getCity();
 
@@ -41,15 +101,11 @@ const updateCurrentWeatherUI = async () => {
 
   isDayTime = accuWeatherDetails.IsDayTime;
 
-  console.log("isdaytime", isDayTime);
+  updateColorText();
 
-  if (isDayTime) {
-    srcIcons = "./Assets/icons-day";
-    icon = "day.Day.Icon";
-  }
   // set the sunrise and the sunset
-  const sunrise = new Date(openWeatherDetails.sys.sunrise * 1000);
-  const sunset = new Date(openWeatherDetails.sys.sunset * 1000);
+  const sunriseTime = new Date(openWeatherDetails.sys.sunrise * 1000);
+  const sunsetTime = new Date(openWeatherDetails.sys.sunset * 1000);
 
   // set the Precipitation to None if it as a default value of Null
   let precipitation = "None";
@@ -81,40 +137,40 @@ const updateCurrentWeatherUI = async () => {
     </div>
     <div class="sun">
       <div class="sun_pos">
-        <img src="./Assets/sunrise.svg" alt="icon" />
-        <div class="sunset_time">${sunrise.getHours()}H</div>
-        <div class="sunset_time">${sunrise.getMinutes()}m</div>
+        <img src="./Assets/${sunrise}.svg" alt="icon" />
+        <div class="sunset_time">${sunriseTime.getHours()}H</div>
+        <div class="sunset_time">${sunriseTime.getMinutes()}m</div>
       </div>
       <div class="sun_pos">
-        <img src="./Assets/sunset.svg" alt="icon" />
-        <div class="sunset_time">${sunset.getHours()}H</div>
-        <div class="sunset_time">${sunset.getMinutes()}m</div>
+        <img src="./Assets/${sunset}.svg" alt="icon" />
+        <div class="sunset_time">${sunsetTime.getHours()}H</div>
+        <div class="sunset_time">${sunsetTime.getMinutes()}m</div>
       </div>
     </div>
   </div>`;
 
   current_condition_info.innerHTML = `<div class="info">
   <div class="info_icon">
-    <img src="./Assets/precip.svg" alt="icon" />
+    <img src="./Assets/${precip}.svg" alt="icon" />
   </div>
   <div class="info_numb">${precipitation}</div>
 </div>
 <div class="info">
   <div class="info_icon">
-    <img src="./Assets/wind.svg" alt="icon" />
+    <img src="./Assets/${wind}.svg" alt="icon" />
   </div>
   <div class="info_numb">${openWeatherDetails.wind.speed}m/s</div>
 </div>
 <div class="info">
   <div class="info_icon">
-    <img src="./Assets/humidity.svg" alt="icon" />
+    <img src="./Assets/${humidity}.svg" alt="icon" />
   </div>
   <div class="info_numb">${openWeatherDetails.main.humidity}%</div>
 </div>
 
 <div class="info">
   <div class="info_icon">
-    <img src="./Assets/barometer.svg" alt="icon" />
+    <img src="./Assets/${pressure}.svg" alt="icon" />
   </div>
   <div class="info_numb">${openWeatherDetails.main.pressure}hPa</div>
 </div>`;
@@ -133,6 +189,8 @@ const updateDailyWeatherUI = async () => {
       icon = day.Day.Icon;
     } else {
       icon = day.Night.Icon;
+      document.querySelector(".min_max_up_down ").style.color = "white";
+      document.querySelector(".maxtemp ").style.borderColor = "white";
     }
     daily_condition.innerHTML += `
   <div class="day_cond">
@@ -175,15 +233,15 @@ const updateHourlyWeatherUI = async () => {
       labels: hours,
       datasets: [
         {
-          backgroundColor: "rgba(255,255,255, 1)",
-          pointBackgroundColor: "rgb(255, 255, 255)",
-          borderColor: "rgb(255, 255, 255)",
+          backgroundColor: colors,
+          pointBackgroundColor: colors,
+          borderColor: colors,
           data: hoursTemperature
         },
         {
           borderWidth: 3,
-          pointBackgroundColor: "rgb(255, 255, 255)",
-          borderColor: "rgb(255, 255, 255)",
+          pointBackgroundColor: colors,
+          borderColor: colors,
           data: hoursTemperature,
           type: "line"
         }
@@ -212,7 +270,7 @@ const updateHourlyWeatherUI = async () => {
               color: "rgba(0, 0, 0, 0)"
             },
             ticks: {
-              fontColor: "rgb(255,255,255)",
+              fontColor: colors,
               padding: -5,
               fontSize: 12
             }
@@ -269,29 +327,3 @@ const updateHourlyWeatherUI = async () => {
 updateCurrentWeatherUI()
   .then(() => updateDailyWeatherUI().then(() => updateHourlyWeatherUI()))
   .catch(error => console.log(error));
-
-window.onload = event => {
-  function onReady(callback) {
-    var intervalId = window.setInterval(function() {
-      if (document.getElementsByTagName("body")[0] !== undefined) {
-        window.clearInterval(intervalId);
-        callback.call(this);
-      }
-      console.log(event.timeStamp);
-    }, event.timeStamp);
-  }
-
-  function setVisible(selector, visible) {
-    const select = document.querySelector(selector);
-    if (visible) {
-      select.classList.remove("fade");
-    } else {
-      select.classList.add("fade");
-    }
-  }
-
-  onReady(function() {
-    setVisible(".app", true);
-    setVisible(".loading", false);
-  });
-};

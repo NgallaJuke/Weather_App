@@ -1,43 +1,21 @@
+:root {
+  --main-day-text-icons-color: white;
+  --main-day-backgroud-color: rgba(202, 228, 250, 0.15);
+}
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,400,700&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-/* Start Loader */
 
-/* 
-#loader {
-  border: 12px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 12px solid #444444;
-  width: 70px;
-  height: 70px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.center {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-} */
-/*  End Lodaer */
 body {
   margin: 0;
   padding: 0;
-  background-image: url(./SkyBlue-Night.jpeg);
+
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
+  color: black;
 }
 
 .grid {
@@ -49,15 +27,6 @@ body {
   justify-content: space-around;
   align-items: flex-start;
   height: fit-content;
-}
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(rgba(60, 117, 223, 0.3), rgba(11, 5, 73, 0.4));
-  z-index: -100;
 }
 
 .sidebar {
@@ -102,7 +71,7 @@ body {
   width: 100%;
   background: none;
   border-radius: 1em;
-  border: 2px solid white;
+  border: 2px solid var(--main-day-text-icons-color);
   padding: 0.3em 0.1em;
   text-align: center;
   font-size: 0.9em;
@@ -115,7 +84,7 @@ body {
   width: 100%;
   background: none;
   border-radius: 1em;
-  border: 2px solid white;
+  border: 2px solid var(--main-day-text-icons-color);
   padding: 0.3em 0.1em;
   text-align: center;
   font-size: 0.9em;
@@ -146,13 +115,12 @@ body {
 
 .app {
   position: relative;
-  color: aliceblue;
-  width: 100%;
+  color: var(--main-day-text-icons-color);
+  width: 100vw;
   height: 100vh;
-  margin-bottom: 0.5em;
+
   padding: 0.2em 0;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(7, minmax(fit-content auto));
   grid-template-areas:
     "header header header header header "
     "location location location location location "
@@ -162,28 +130,15 @@ body {
     "daily_condition daily_condition daily_condition daily_condition daily_condition"
     "footer footer footer footer footer ";
 }
-
-/* #loading {
-  border: 12px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 12px solid #444444;
-  width: 70px;
-  height: 70px;
-  animation: spin 1s linear infinite;
-}
-.center {
+.overlay {
   position: absolute;
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
-  margin: auto;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(rgba(60, 117, 223, 0.3), rgba(11, 5, 73, 0.4));
+  z-index: -100;
 }
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
-} */
 .loading {
   display: block;
   position: absolute;
@@ -192,7 +147,6 @@ body {
   z-index: 100;
   width: 100vw;
   height: 100vh;
-
   background-image: url("./loader.svg");
   background-repeat: no-repeat;
   background-position: center;
@@ -331,16 +285,13 @@ body {
   grid-area: hourly_condition;
 }
 .daily_condition {
-  background-color: rgba(202, 228, 250, 0.15);
-  margin: 0.4em;
-  padding: 0.5em 0;
   grid-area: daily_condition;
 }
 .footer {
   grid-area: footer;
   font-size: 0.7em;
   text-align: center;
-  position: absolute;
+  position: relative;
   bottom: 0;
   justify-self: center;
   color: rgba(255, 255, 255, 0.301);
@@ -368,8 +319,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-self: center;
-  color: rgba(255, 255, 255, 0.644);
-  background-color: rgba(202, 228, 250, 0.09);
+  background-color: var(--main-day-backgroud-color);
   border-radius: 0.5em;
   text-align: center;
   z-index: -1;
@@ -399,16 +349,14 @@ body {
   width: 100%;
   text-align: center;
   font-size: 0.7em;
-  color: white;
+  width: fit-content;
   background-color: transparent;
 }
 .maxtemp {
-  border-bottom: 3px solid white;
-  border-color: rgba(255, 255, 255, 0.644);
+  border-bottom: 3px solid;
 }
 .maxtemp_daily {
-  border-bottom: 1px solid white;
-  border-color: rgba(255, 255, 255, 0.644);
+  border-bottom: 1px solid;
 }
 
 .condition_txt {
@@ -444,7 +392,7 @@ body {
   margin: 0 0.4em;
   height: fit-content;
   border-radius: 0.5em;
-  background-color: rgba(202, 228, 250, 0.09);
+  background-color: var(--main-day-backgroud-color);
 }
 .info_icon {
   border-radius: 50%;
@@ -468,6 +416,10 @@ body {
 }
 .day_cond {
   margin: 0 0.4em;
+
+  border-radius: 0.4em;
+  padding: 0.2em;
+  background-color: var(--main-day-backgroud-color);
 }
 .day {
   font-size: 0.8em;
