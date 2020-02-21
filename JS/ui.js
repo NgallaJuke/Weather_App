@@ -24,16 +24,25 @@ const currentDay = currentDayAndHour.substring(0, day);
 const currentHour = currentDayAndHour.substring(hour + 2, hour + 7);
 
 let isDayTime = Boolean; //Check if it is dayTime or nighTtime
+let srcIcons = "./Assets/icons";
+
+let icon = "day.Night.Icon";
 
 const updateCurrentWeather = async () => {
   const cityDetails = await getCity();
-  console.log("cityDetails", cityDetails);
+
   const accuWeatherDetails = await getCurrentAccuWeahter(cityDetails.Key);
   const openWeatherDetails = await getCurrentOpenWeahter();
-
   console.log("accuWeatherDetails", accuWeatherDetails);
-  console.log("openWeatherDetails", openWeatherDetails);
-  isDayTime = accuWeatherDetails.isDayTime;
+
+  isDayTime = accuWeatherDetails.IsDayTime;
+
+  console.log("isdaytime", isDayTime);
+
+  if (isDayTime) {
+    srcIcons = "./Assets/icons-day";
+    icon = "day.Day.Icon";
+  }
   // set the sunrise and the sunset
   const sunrise = new Date(openWeatherDetails.sys.sunrise * 1000);
   const sunset = new Date(openWeatherDetails.sys.sunset * 1000);
@@ -49,13 +58,11 @@ const updateCurrentWeather = async () => {
   day_hour.innerHTML = `${currentDay} - ${currentHour}`;
   locat.innerHTML = `${cityDetails.EnglishName} - ${cityDetails.Country.ID} `;
   current_condition.innerHTML = `<div class="condition_txt">${
-    openWeatherDetails.weather[0].main
+    accuWeatherDetails.WeatherText
   }</div>
   <div class="current_weather grid">
     <div class="cur_cond_icon">
-      <img src="./Assets/color_icon/${
-        openWeatherDetails.weather[0].icon
-      }.png" alt="icon" />
+      <img src="${srcIcons}/${accuWeatherDetails.WeatherIcon}.svg" alt="icon" />
     </div>
     <div class="cur_cond_temp">
     ${
@@ -109,155 +116,47 @@ const updateCurrentWeather = async () => {
 </div>`;
 };
 
-const updateHourlyWeather = async () => {
-  const getDailyOpenWeahter = await getDailyOpenWeahter();
+const updateDailyWeather = async () => {
+  const cityDetails = await getCity();
 
-  console.log("getDailyAndHourlyOpenWeahter", getDailyOpenWeahter);
+  const fiveDaysWeather = await getWeekWeahter(cityDetails.Key);
+  console.log("fiveDaysWeather", fiveDaysWeather);
 
-  let hours = [];
-  let temps = [];
-  hourWeatherDetails.forEach(hourInDay => {
-    // set the next 10 hours
-    const hour =
-      new Date(hourInDay.DateTime).toUTCString().substring(17, 19) + "h";
-    hours.push(hour);
+  fiveDaysWeather.DailyForecasts.forEach(day => {
+    const dayName = new Date(day.Date).toDateString().substring(0, 3);
 
-    temps.push(Math.round(((hourInDay.Temperature.Value - 32) * 5) / 9));
-  });
-  hours = hours.slice(0, 8);
-  temps = temps.slice(0, 8);
-  console.log("hours", hours);
-  console.log("temps", temps);
-  // /* Start Chart.js */
-  let ctx = document.getElementById("myChart").getContext("2d");
-  var gradient = ctx.createLinearGradient(0, 0, 0, 400);
-  gradient.addColorStop(0, "rgba(255,255,255,0.5)");
-  gradient.addColorStop(1, "rgba(0,0,0,0)");
-  let chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: "bar",
-    // The data for our dataset
-    data: {
-      labels: hours,
-      datasets: [
-        {
-          backgroundColor: "rgba(255,255,255, 0.7)",
-          pointBackgroundColor: "rgb(255, 255, 255)",
-          borderColor: "rgb(255, 255, 255)",
-          data: temps
-        },
-        {
-          borderWidth: 5,
-          pointBackgroundColor: "rgb(255, 255, 255)",
-          borderColor: "rgb(255, 255, 255)",
-          data: temps,
-          type: "line"
-        }
-      ]
-    },
-
-    // Configuration options go here
-    options: {
-      legend: {
-        display: false
-      },
-      layout: {
-        padding: {
-          left: -20,
-          right: 0,
-          top: 20,
-          bottom: -5
-        }
-      },
-      scales: {
-        xAxes: [
-          {
-            barPercentage: 0.05,
-            gridLines: {
-              offsetGridLines: true,
-              color: "rgba(0, 0, 0, 0)"
-            },
-            ticks: {
-              fontColor: "rgb(255,255,255)",
-              padding: -5,
-              fontSize: 12
-            }
-          }
-        ],
-        yAxes: [
-          {
-            gridLines: {
-              color: "rgba(0, 0, 0, 0)"
-            },
-            ticks: {
-              display: false,
-              fontSize: 12
-            },
-            stacked: true
-          }
-        ]
-      },
-      hover: {
-        animationDuration: 0
-      },
-      animation: {
-        duration: 2000,
-        onComplete: function() {
-          let chartInstance = this.chart,
-            ctx = chartInstance.ctx;
-          ctx.font = Chart.helpers.fontString(
-            Chart.defaults.global.defaultFontStyle,
-            Chart.defaults.global.defaultFontFamily
-          );
-          ctx.textAlign = "center";
-          ctx.textBaseline = "bottom";
-          this.data.datasets.forEach(function(dataset, i) {
-            let meta = chartInstance.controller.getDatasetMeta(i);
-            meta.data.forEach(function(bar, index) {
-              let data = dataset.data[index] + "°";
-              ctx.fillText(data, bar._model.x, bar._model.y - 8);
-            });
-          });
-        }
-      }
+    if (isDayTime) {
+      icon = day.Day.Icon;
+    } else {
+      icon = day.Night.Icon;
     }
+    daily_condition.innerHTML += `
+  <div class="day_cond">
+  <div class="day">${dayName}</div>
+  <div class="daily_icon">
+    <img src="${srcIcons}/${icon}.svg" alt="icon" />
+  </div><div class="min_max_up_down min_max_daily">
+            <div class="maxtemp maxtemp_daily">${Math.floor(
+              (day.Temperature.Maximum.Value - 32) * (5 / 9)
+            )}&deg;C</div>
+            <div id="mintemp">${Math.floor(
+              (day.Temperature.Minimum.Value - 32) * (5 / 9)
+            )}&deg;C</div>
+          </div>
+</div>
+`;
   });
-
-  /* End Chart.js */
 };
 
-// const updateDailyWeather = async () => {
-//   const loc = await getIpInfo();
-//   const cityDetails = await getCity(loc.city);
-//   const weekAccuWeatherDetails = await getDailyAccuWeahter(cityDetails.Key);
-//   console.log("weekAccuWeatherDetails", weekAccuWeatherDetails);
-//   const weekOpenWeatherDetails = await getDailyAndHourlyOpenWeahter();
-//   console.log("weekOpenWeatherDetails", weekOpenWeatherDetails);
-//   let srcIcon = "";
-
-//   weekAccuWeatherDetails.forEach(dailyWeather => {
-//     const dayOfTheWeek = new Date(dailyWeather.Date)
-//       .toDateString()
-//       .substring(0, 3);
-//     console.log("dayOfTheWeek", dayOfTheWeek);
-//     if (isDayTime) {
-//       srcIcon = `./Assets/icons-day/${dailyWeather.Day.Icon}.png`;
-//     } else {
-//       srcIcon = `./Assets/icons/${dailyWeather.Night.Icon}.png`;
-//     }
-//     daily_condition.innerHTML += `<div class="day_cond">
-//     <div class="day">${dayOfTheWeek}</div>
-//     <div class="daily_icon">
-//       <img src="${srcIcon}" alt="icon"/>
-//     </div>
-
-//   </div>`;
-//   });
+// const updateDailyHourlyUI = async () => {
+//   const weatherData = await getDailyAndHourlyOpenWeahter();
+//   console.log("response", weatherData);
 // };
 
-updateCurrentWeather();
-
-updateHourlyWeather();
+// updateDailyHorulyUI();
+updateCurrentWeather()
+  .then(() => updateDailyWeather())
+  .catch(error => console.log(error));
 
 window.onload = event => {
   function onReady(callback) {
