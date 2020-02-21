@@ -44,6 +44,15 @@ const getWeekWeahter = async id => {
   return data;
 };
 
+const getHourWeahter = async id => {
+  hourWeatherURI =
+    "http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/";
+  const query = `${id}?apikey=${accuWeatherKey}`;
+  const response = await fetch(hourWeatherURI + query);
+  const data = await response.json();
+  return data;
+};
+
 const getDailyAndHourlyOpenWeahter = async () => {
   const loc = await getIpInfo();
   const query = `http://api.openweathermap.org/data/2.5/forecast?lat=${loc.latitude}&lon=${loc.longitude}&units=metric&appid=${openWeatherKey}`;

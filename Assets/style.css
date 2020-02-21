@@ -37,6 +37,7 @@ body {
   background-image: url(./SkyBlue-Night.jpeg);
   background-size: cover;
   background-repeat: no-repeat;
+  height: 100vh;
 }
 
 .grid {
@@ -148,6 +149,7 @@ body {
   color: aliceblue;
   width: 100%;
   height: 100vh;
+  margin-bottom: 0.5em;
   padding: 0.2em 0;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(7, minmax(fit-content auto));
@@ -330,6 +332,7 @@ body {
 }
 .daily_condition {
   background-color: rgba(202, 228, 250, 0.15);
+  margin: 0.4em;
   padding: 0.5em 0;
   grid-area: daily_condition;
 }
@@ -427,7 +430,7 @@ body {
 }
 .cur_cond_temp {
   grid-area: cur_cond_temp;
-  font-size: 5em;
+  font-size: 4.2em;
 }
 .deg_celcuis {
   grid-area: deg_celcuis;
