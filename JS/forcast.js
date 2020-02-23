@@ -9,7 +9,7 @@ const getIpInfo = async () => {
   return data;
 };
 
-const getCity = async () => {
+let getCity = async () => {
   const loc = await getIpInfo();
   const cityURI =
     "http://dataservice.accuweather.com/locations/v1/cities/search";

@@ -67,7 +67,7 @@ body {
   transition: all 0.5s;
 }
 
-.sidebar > input {
+.setCity > input {
   width: 100%;
   background: none;
   border-radius: 1em;
@@ -80,7 +80,8 @@ body {
   margin-top: 2.5em;
   margin-bottom: 2em;
 }
-.sidebar_right > input {
+
+.searchCity > input {
   width: 100%;
   background: none;
   border-radius: 1em;
@@ -93,10 +94,10 @@ body {
   margin-top: 2.5em;
   margin-bottom: 2em;
 }
-.sidebar > input:focus {
+.setCity > input:focus {
   outline: none;
 }
-.sidebar_right > input:focus {
+.searchCity > input:focus {
   outline: none;
 }
 .list_City > ul > li {
@@ -110,6 +111,19 @@ body {
   text-align: center;
 }
 .list_City > ul > li:hover {
+  background-color: rgba(147, 147, 148, 0.26);
+}
+.list_City_copy > ul > li {
+  width: 100%;
+  padding: 1em 0;
+  padding-bottom: 0.2em;
+  color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(147, 147, 148, 0.26);
+  display: block;
+  text-decoration: none;
+  text-align: center;
+}
+.list_City_copy > ul > li:hover {
   background-color: rgba(147, 147, 148, 0.26);
 }
 
@@ -425,4 +439,7 @@ body {
   font-size: 0.8em;
   text-align: center;
   font-weight: bold;
+}
+.fade {
+  display: none;
 }
