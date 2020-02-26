@@ -1,5 +1,6 @@
 const accuWeatherKey = "POH4h9z16ytixaykpK39wufBIDt90v8J";
 const openWeatherKey = "eca8d91809f3ed63a7b5e27cda1fb072";
+const geolocaKey = "82058c447167c6";
 const weatherURI = "http://dataservice.accuweather.com/currentconditions/v1/";
 
 const getIpInfo = async () => {
@@ -34,6 +35,18 @@ const getCurrentOpenWeahter = async () => {
   const data = await response.json();
   return data;
 };
+const getCurrentOpenWeahter_city = async city => {
+  const cityCoords = await fetch(
+    `https://eu1.locationiq.com/v1/search.php?key=${geolocaKey}&q=${city}&format=json`
+  );
+  const data1 = await cityCoords.json();
+  console.log("cityCoords", data1);
+
+  const query = `http://api.openweathermap.org/data/2.5/weather?lat=${data1[0].lat}&lon=${data1[0].lon}&units=metric&appid=${openWeatherKey}`;
+  const response = await fetch(query);
+  const data = await response.json();
+  return data;
+};
 
 const getWeekWeahter = async id => {
   weekWeatherURI =
@@ -53,11 +66,12 @@ const getHourWeahter = async id => {
   return data;
 };
 
-const getDailyAndHourlyOpenWeahter = async () => {
+const getDailyAndHourlyOpenWeahter = async city => {
   const loc = await getIpInfo();
-  const query = `http://api.openweathermap.org/data/2.5/forecast?lat=${loc.latitude}&lon=${loc.longitude}&units=metric&appid=${openWeatherKey}`;
+  const query = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${openWeatherKey}`;
   const response = await fetch(query);
   const data = await response.json();
+  console.log("data", data);
 
   return data;
 };
