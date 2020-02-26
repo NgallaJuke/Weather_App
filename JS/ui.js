@@ -72,7 +72,7 @@ const updateColorText = () => {
   } else {
     daily_condition.style.color = "white";
     document.querySelector("body").style.backgroundImage =
-      "url('../Assets/Skyblue-mobile.jpeg')";
+      "url('../Assets/SkyBlue-Night.jpeg')";
   }
 };
 
@@ -154,8 +154,12 @@ const currentWeather = async (
   </div>
   <div class="min_max_up_down">
     <div class="min_man_temp">
-      <div class="maxtemp">${openWeatherDetails.main.temp_max}&deg;C</div>
-      <div id="mintemp">${openWeatherDetails.main.temp_min}&deg;C</div>
+      <div class="maxtemp">${openWeatherDetails.main.temp_max.toFixed(
+        1
+      )}&deg;C</div>
+      <div id="mintemp">${openWeatherDetails.main.temp_min.toFixed(
+        1
+      )}&deg;C</div>
     </div>
     <div class="sun">
       <div class="sun_pos">
