@@ -1,8 +1,9 @@
+@import url("https://fonts.googleapis.com/css?family=Fredoka+One&display=swap");
 :root {
   --main-day-text-icons-color: white;
-  --main-day-backgroud-color: rgba(202, 228, 250, 0.15);
+  --main-day-backgroud-color: rgba(250, 250, 250, 0.2);
 }
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,400,700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -42,6 +43,7 @@ body {
   font-weight: bold;
   font-size: 1.2em;
   transition: 0.5s;
+  z-index: 100;
 }
 
 .sidebar_right {
@@ -57,6 +59,7 @@ body {
   font-weight: bold;
   font-size: 1.2em;
   transition: 0.5s;
+  z-index: 100;
 }
 
 .sidebar.active {
@@ -132,7 +135,7 @@ body {
   color: var(--main-day-text-icons-color);
   width: 100vw;
   height: 100vh;
-
+  font-family: "Fredoka One";
   padding: 0.2em 0;
   grid-template-columns: repeat(5, 1fr);
   grid-template-areas:
@@ -144,15 +147,7 @@ body {
     "daily_condition daily_condition daily_condition daily_condition daily_condition"
     "footer footer footer footer footer ";
 }
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(rgba(60, 117, 223, 0.3), rgba(11, 5, 73, 0.4));
-  z-index: -100;
-}
+
 .loading {
   display: block;
   position: absolute;
@@ -182,6 +177,7 @@ body {
   background: none;
   border-radius: 50%;
   cursor: pointer;
+  z-index: 100;
 }
 .input_search:focus {
   outline: none;
@@ -273,7 +269,6 @@ body {
     "current_weather current_weather current_weather . min_max_up_down";
   grid-area: current_condition;
   justify-content: center;
-  z-index: -1;
 }
 .current_condition_info {
   padding: 0.5em 0;
@@ -284,7 +279,6 @@ body {
   left: -10px;
   top: -5px;
   font-size: 0.7em;
-  z-index: -1;
 }
 #deg {
   position: relative;
@@ -293,7 +287,6 @@ body {
   font-size: 1em;
   font-weight: 10;
   margin-left: 0.1em;
-  z-index: -1;
 }
 .hourly_condition {
   grid-area: hourly_condition;
@@ -309,7 +302,6 @@ body {
   bottom: 0;
   justify-self: center;
   color: rgba(255, 255, 255, 0.301);
-  z-index: -1;
 }
 .current_weather {
   grid-template-columns: repeat(3, 1fr);
@@ -336,7 +328,6 @@ body {
   background-color: var(--main-day-backgroud-color);
   border-radius: 0.5em;
   text-align: center;
-  z-index: -1;
 }
 .min_man_temp {
   justify-self: center;
@@ -393,7 +384,7 @@ body {
 }
 .cur_cond_temp {
   grid-area: cur_cond_temp;
-  font-size: 3.5rem;
+  font-size: 3.8rem;
 }
 .deg_celcuis {
   grid-area: deg_celcuis;
@@ -408,6 +399,7 @@ body {
   height: fit-content;
   border-radius: 0.5em;
   background-color: var(--main-day-backgroud-color);
+  padding-bottom: 2px;
 }
 .info_icon {
   border-radius: 50%;
@@ -425,16 +417,18 @@ body {
   margin: auto;
 }
 .info_numb {
-  font-weight: bold;
   font-size: 0.8em;
   border-radius: 0.5em;
 }
 .day_cond {
   margin: 0 0.4em;
-
   border-radius: 0.4em;
   padding: 0.2em;
   background-color: var(--main-day-backgroud-color);
+  z-index: 1;
+}
+.border {
+  border: 1px solid var(--main-day-text-icons-color);
 }
 .day {
   font-size: 0.8em;

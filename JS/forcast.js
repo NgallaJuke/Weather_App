@@ -66,12 +66,16 @@ const getHourWeahter = async id => {
   return data;
 };
 
-const getDailyAndHourlyOpenWeahter = async city => {
+const getDailyAndHourlyOpenWeahter = async (city, date) => {
   const loc = await getIpInfo();
   const query = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${openWeatherKey}`;
   const response = await fetch(query);
-  const data = await response.json();
-  console.log("data", data);
+  const datas = await response.json();
+  let array = [];
+  datas.list.forEach(data => {
+    if (date === data.dt_txt.substring(0, 10)) array.push(data);
+  });
+  console.log("ARRAY", array);
 
-  return data;
+  return array;
 };

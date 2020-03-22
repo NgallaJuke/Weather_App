@@ -34,6 +34,7 @@ gradient.addColorStop(0, "rgba(255,255,255,0.5)");
 gradient.addColorStop(1, "rgba(0,0,0,0)");
 let menuOpen = false;
 let menuSearch = false;
+let dayInWeek = [];
 
 let isDayTime = Boolean; //Check if it is dayTime or nighTtime
 let srcIcons = "./Assets/icons";
@@ -67,7 +68,7 @@ const updateColorText = () => {
     colors = "rgb(0,0,0)";
     document.documentElement.style.setProperty(
       "--main-day-backgroud-color",
-      "rgba(0, 0, 0, 0.1)"
+      "rgba(255, 255, 255, 0.3)"
     );
   } else {
     daily_condition.style.color = "white";
@@ -206,10 +207,16 @@ const currentWeather = async (
 const getDailyWeather = async cityDetails => {
   const fiveDaysWeather = await getWeekWeahter(cityDetails.Key);
   console.log("fiveDaysWeather", fiveDaysWeather);
+  // let data_weather = await getDailyAndHourlyOpenWeahter("dakar");
+  // console.log("data_weather", typeof data_weather.list);
+  // console.log("data_weather", data_weather.list);
+  // let correctDate = [];
+
   daily_condition.innerHTML = "";
 
   fiveDaysWeather.DailyForecasts.forEach(day => {
     const dayName = new Date(day.Date).toDateString().substring(0, 3);
+    console.log("DATE", day.Date.substring(0, 10));
 
     if (isDayTime) {
       icon = day.Day.Icon;
@@ -219,7 +226,7 @@ const getDailyWeather = async cityDetails => {
       document.querySelector(".maxtemp ").style.borderColor = "white";
     }
     daily_condition.innerHTML += `
-  <div class="day_cond">
+  <div class="day_cond" data-target='${day.Date.substring(0, 10)}' >
   <div class="day">${dayName}</div>
   <div class="daily_icon">
     <img src="${srcIcons}/${icon}.svg" alt="icon" />
@@ -233,6 +240,142 @@ const getDailyWeather = async cityDetails => {
           </div>
 </div>
 `;
+  });
+  const counters = document.querySelectorAll(".day_cond");
+  console.log("counters", Array.from(counters));
+  counters[0].classList.add("border");
+  counters.forEach(async counter => {
+    counter.addEventListener("click", e => {
+      e.stopPropagation();
+      Array.from(counter.parentNode.children).forEach(child =>
+        child.classList.remove("border")
+      );
+
+      counter.classList.add("border");
+      const target = counter.getAttribute("data-target");
+      console.log("Target", target);
+      getDailyAndHourlyOpenWeahter("dakar", target)
+        .then(dataArray => {
+          console.log("DATAARRAY", dataArray);
+          if (dataArray.length === 0) {
+            const updateHourlyWeatherUI = async () => {
+              const cityDetails = await getCity();
+              getHoulyWeather(cityDetails);
+            };
+            updateHourlyWeatherUI();
+          }
+          let hours = [];
+          let hoursTemperature = [];
+          dataArray.forEach(data => {
+            console.log("datatata", data);
+
+            const currHour = data.dt_txt.substring(11, 13);
+
+            hours.push(currHour + "h");
+            hoursTemperature.push(data.main.temp.toFixed(0));
+          });
+
+          /* Start Chart.js */
+
+          let chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: "bar",
+            // The data for our dataset
+            data: {
+              labels: hours,
+              datasets: [
+                {
+                  backgroundColor: "rgba(255, 255, 255, 0.3)",
+                  pointBackgroundColor: colors,
+                  borderColor: colors,
+                  data: hoursTemperature
+                },
+                {
+                  backgroundColor: "rgba(255, 255, 255, 0.3)",
+                  borderWidth: 3,
+                  pointBackgroundColor: colors,
+                  borderColor: colors,
+                  data: hoursTemperature,
+                  type: "line"
+                }
+              ]
+            },
+
+            // Configuration options go here
+            options: {
+              legend: {
+                display: false
+              },
+              layout: {
+                padding: {
+                  left: -20,
+                  right: 0,
+                  top: 20,
+                  bottom: -5
+                }
+              },
+              scales: {
+                xAxes: [
+                  {
+                    barPercentage: 0.04,
+                    gridLines: {
+                      offsetGridLines: true,
+                      color: "rgba(0, 0, 0, 0)"
+                    },
+                    ticks: {
+                      fontFamily: "Fredoka One",
+                      fontColor: colors,
+                      padding: -5,
+                      fontSize: 12
+                    }
+                  }
+                ],
+                yAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)"
+                    },
+                    ticks: {
+                      fontFamily: "Fredoka One",
+                      fontColor: colors,
+                      display: false,
+                      fontSize: 12
+                    },
+                    stacked: true
+                  }
+                ]
+              },
+              hover: {
+                animationDuration: 0
+              },
+              animation: {
+                duration: 2000,
+                onComplete: function() {
+                  let chartInstance = this.chart,
+                    ctx = chartInstance.ctx;
+
+                  ctx.font = Chart.helpers.fontString(
+                    Chart.defaults.global.defaultFontStyle,
+                    Chart.defaults.global.defaultFontFamily
+                  );
+                  ctx.textAlign = "center";
+                  ctx.textBaseline = "bottom";
+                  this.data.datasets.forEach(function(dataset, i) {
+                    let meta = chartInstance.controller.getDatasetMeta(i);
+                    meta.data.forEach(function(bar, index) {
+                      let data = dataset.data[index] + "°";
+                      ctx.fillText(data, bar._model.x, bar._model.y - 8);
+                    });
+                  });
+                }
+              }
+            }
+          });
+
+          /* End Chart.js */
+        })
+        .catch(err => console.log(err));
+    });
   });
 };
 
@@ -258,12 +401,13 @@ const getHoulyWeather = async cityDetails => {
       labels: hours,
       datasets: [
         {
-          backgroundColor: colors,
+          backgroundColor: "rgba(255, 255, 255, 0.3)",
           pointBackgroundColor: colors,
           borderColor: colors,
           data: hoursTemperature
         },
         {
+          backgroundColor: "rgba(255, 255, 255, 0.3)",
           borderWidth: 3,
           pointBackgroundColor: colors,
           borderColor: colors,
@@ -295,6 +439,7 @@ const getHoulyWeather = async cityDetails => {
               color: "rgba(0, 0, 0, 0)"
             },
             ticks: {
+              fontFamily: "Fredoka One",
               fontColor: colors,
               padding: -5,
               fontSize: 12
@@ -307,6 +452,8 @@ const getHoulyWeather = async cityDetails => {
               color: "rgba(0, 0, 0, 0)"
             },
             ticks: {
+              fontFamily: "Fredoka One",
+              fontColor: colors,
               display: false,
               fontSize: 12
             },
@@ -322,6 +469,7 @@ const getHoulyWeather = async cityDetails => {
         onComplete: function() {
           let chartInstance = this.chart,
             ctx = chartInstance.ctx;
+
           ctx.font = Chart.helpers.fontString(
             Chart.defaults.global.defaultFontStyle,
             Chart.defaults.global.defaultFontFamily
@@ -343,6 +491,115 @@ const getHoulyWeather = async cityDetails => {
   /* End Chart.js */
 };
 
+const UpdateGetHoulyWeather = async () => {
+  let hours = [];
+  let hoursTemperature = [];
+  hourWeather.forEach(hour => {
+    const currHour = new Date(hour.DateTime).toUTCString().substring(17, 19);
+
+    hours.push(currHour + "h");
+    hoursTemperature.push(((hour.Temperature.Value - 32) * (5 / 9)).toFixed(0));
+  });
+
+  /* Start Chart.js */
+
+  let chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: "bar",
+    // The data for our dataset
+    data: {
+      labels: hours,
+      datasets: [
+        {
+          backgroundColor: "rgba(255, 255, 255, 0.3)",
+          pointBackgroundColor: colors,
+          borderColor: colors,
+          data: hoursTemperature
+        },
+        {
+          backgroundColor: "rgba(255, 255, 255, 0.3)",
+          borderWidth: 3,
+          pointBackgroundColor: colors,
+          borderColor: colors,
+          data: hoursTemperature,
+          type: "line"
+        }
+      ]
+    },
+
+    // Configuration options go here
+    options: {
+      legend: {
+        display: false
+      },
+      layout: {
+        padding: {
+          left: -20,
+          right: 0,
+          top: 20,
+          bottom: -5
+        }
+      },
+      scales: {
+        xAxes: [
+          {
+            barPercentage: 0.04,
+            gridLines: {
+              offsetGridLines: true,
+              color: "rgba(0, 0, 0, 0)"
+            },
+            ticks: {
+              fontFamily: "Fredoka One",
+              fontColor: colors,
+              padding: -5,
+              fontSize: 12
+            }
+          }
+        ],
+        yAxes: [
+          {
+            gridLines: {
+              color: "rgba(0, 0, 0, 0)"
+            },
+            ticks: {
+              fontFamily: "Fredoka One",
+              fontColor: colors,
+              display: false,
+              fontSize: 12
+            },
+            stacked: true
+          }
+        ]
+      },
+      hover: {
+        animationDuration: 0
+      },
+      animation: {
+        duration: 2000,
+        onComplete: function() {
+          let chartInstance = this.chart,
+            ctx = chartInstance.ctx;
+
+          ctx.font = Chart.helpers.fontString(
+            Chart.defaults.global.defaultFontStyle,
+            Chart.defaults.global.defaultFontFamily
+          );
+          ctx.textAlign = "center";
+          ctx.textBaseline = "bottom";
+          this.data.datasets.forEach(function(dataset, i) {
+            let meta = chartInstance.controller.getDatasetMeta(i);
+            meta.data.forEach(function(bar, index) {
+              let data = dataset.data[index] + "°";
+              ctx.fillText(data, bar._model.x, bar._model.y - 8);
+            });
+          });
+        }
+      }
+    }
+  });
+
+  /* End Chart.js */
+};
 const ListCitySet = () => {
   const list_City = document.querySelector(".list_City ul");
   if (localStorage.getItem("citySet")) {
