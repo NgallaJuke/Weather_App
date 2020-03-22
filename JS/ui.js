@@ -205,6 +205,7 @@ const currentWeather = async (
 };
 
 const getDailyWeather = async cityDetails => {
+  console.log("cityDetails :", cityDetails);
   const fiveDaysWeather = await getWeekWeahter(cityDetails.Key);
   console.log("fiveDaysWeather", fiveDaysWeather);
   // let data_weather = await getDailyAndHourlyOpenWeahter("dakar");
@@ -247,6 +248,7 @@ const getDailyWeather = async cityDetails => {
   counters.forEach(async counter => {
     counter.addEventListener("click", e => {
       e.stopPropagation();
+
       Array.from(counter.parentNode.children).forEach(child =>
         child.classList.remove("border")
       );
@@ -254,7 +256,7 @@ const getDailyWeather = async cityDetails => {
       counter.classList.add("border");
       const target = counter.getAttribute("data-target");
       console.log("Target", target);
-      getDailyAndHourlyOpenWeahter("dakar", target)
+      getDailyAndHourlyOpenWeahter(cityDetails.EnglishName, target)
         .then(dataArray => {
           console.log("DATAARRAY", dataArray);
           if (dataArray.length === 0) {
