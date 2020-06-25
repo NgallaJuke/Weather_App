@@ -21,7 +21,7 @@ const options = {
   hour: "2-digit",
   minute: "2-digit",
   second: "2-digit",
-  hour12: false
+  hour12: false,
 }; //  day and time
 
 const currentDayAndHour = new Date().toLocaleTimeString("en-us", options);
@@ -52,7 +52,7 @@ const updateColorText = () => {
     document.querySelector(".app").style.color = "black";
     document.querySelector(".app").style.color = "black";
     document.querySelector(".condition_txt").style.color = "black";
-    document.querySelector("body").style.backgroundImage =
+    document.querySelector(".app").style.backgroundImage =
       "url('../Assets/DayWind.jpg')";
     day_hour.style.color = "black";
 
@@ -94,7 +94,7 @@ const updateHourlyWeatherUI = async () => {
   getHoulyWeather(cityDetails);
 };
 
-const updateCurrentWeatherUI_City = async city => {
+const updateCurrentWeatherUI_City = async (city) => {
   const cityDetails = await getCityBySearch(city);
   const accuWeatherDetails = await getCurrentAccuWeahter(cityDetails.Key);
   const openWeatherDetails = await getCurrentOpenWeahter_city(
@@ -103,12 +103,12 @@ const updateCurrentWeatherUI_City = async city => {
   currentWeather(cityDetails, accuWeatherDetails, openWeatherDetails);
 };
 
-const updateDailyWeatherUI_City = async city => {
+const updateDailyWeatherUI_City = async (city) => {
   const cityDetails = await getCityBySearch(city);
   getDailyWeather(cityDetails);
 };
 
-const updateHourlyWeatherUI_City = async city => {
+const updateHourlyWeatherUI_City = async (city) => {
   const cityDetails = await getCityBySearch(city);
   getHoulyWeather(cityDetails);
 };
@@ -204,7 +204,7 @@ const currentWeather = async (
 </div>`;
 };
 
-const getDailyWeather = async cityDetails => {
+const getDailyWeather = async (cityDetails) => {
   console.log("cityDetails :", cityDetails);
   const fiveDaysWeather = await getWeekWeahter(cityDetails.Key);
   console.log("fiveDaysWeather", fiveDaysWeather);
@@ -215,7 +215,7 @@ const getDailyWeather = async cityDetails => {
 
   daily_condition.innerHTML = "";
 
-  fiveDaysWeather.DailyForecasts.forEach(day => {
+  fiveDaysWeather.DailyForecasts.forEach((day) => {
     const dayName = new Date(day.Date).toDateString().substring(0, 3);
     console.log("DATE", day.Date.substring(0, 10));
 
@@ -245,11 +245,11 @@ const getDailyWeather = async cityDetails => {
   const counters = document.querySelectorAll(".day_cond");
   console.log("counters", Array.from(counters));
   counters[0].classList.add("border");
-  counters.forEach(async counter => {
-    counter.addEventListener("click", e => {
+  counters.forEach(async (counter) => {
+    counter.addEventListener("click", (e) => {
       e.stopPropagation();
 
-      Array.from(counter.parentNode.children).forEach(child =>
+      Array.from(counter.parentNode.children).forEach((child) =>
         child.classList.remove("border")
       );
 
@@ -257,7 +257,7 @@ const getDailyWeather = async cityDetails => {
       const target = counter.getAttribute("data-target");
       console.log("Target", target);
       getDailyAndHourlyOpenWeahter(cityDetails.EnglishName, target)
-        .then(dataArray => {
+        .then((dataArray) => {
           console.log("DATAARRAY", dataArray);
           if (dataArray.length === 0) {
             const updateHourlyWeatherUI = async () => {
@@ -268,7 +268,7 @@ const getDailyWeather = async cityDetails => {
           }
           let hours = [];
           let hoursTemperature = [];
-          dataArray.forEach(data => {
+          dataArray.forEach((data) => {
             console.log("datatata", data);
 
             const currHour = data.dt_txt.substring(11, 13);
@@ -290,7 +290,7 @@ const getDailyWeather = async cityDetails => {
                   backgroundColor: "rgba(255, 255, 255, 0.3)",
                   pointBackgroundColor: colors,
                   borderColor: colors,
-                  data: hoursTemperature
+                  data: hoursTemperature,
                 },
                 {
                   backgroundColor: "rgba(255, 255, 255, 0.3)",
@@ -298,23 +298,23 @@ const getDailyWeather = async cityDetails => {
                   pointBackgroundColor: colors,
                   borderColor: colors,
                   data: hoursTemperature,
-                  type: "line"
-                }
-              ]
+                  type: "line",
+                },
+              ],
             },
 
             // Configuration options go here
             options: {
               legend: {
-                display: false
+                display: false,
               },
               layout: {
                 padding: {
                   left: -20,
                   right: 0,
                   top: 20,
-                  bottom: -5
-                }
+                  bottom: -5,
+                },
               },
               scales: {
                 xAxes: [
@@ -322,37 +322,37 @@ const getDailyWeather = async cityDetails => {
                     barPercentage: 0.04,
                     gridLines: {
                       offsetGridLines: true,
-                      color: "rgba(0, 0, 0, 0)"
+                      color: "rgba(0, 0, 0, 0)",
                     },
                     ticks: {
                       fontFamily: "Fredoka One",
                       fontColor: colors,
                       padding: -5,
-                      fontSize: 12
-                    }
-                  }
+                      fontSize: 12,
+                    },
+                  },
                 ],
                 yAxes: [
                   {
                     gridLines: {
-                      color: "rgba(0, 0, 0, 0)"
+                      color: "rgba(0, 0, 0, 0)",
                     },
                     ticks: {
                       fontFamily: "Fredoka One",
                       fontColor: colors,
                       display: false,
-                      fontSize: 12
+                      fontSize: 12,
                     },
-                    stacked: true
-                  }
-                ]
+                    stacked: true,
+                  },
+                ],
               },
               hover: {
-                animationDuration: 0
+                animationDuration: 0,
               },
               animation: {
                 duration: 2000,
-                onComplete: function() {
+                onComplete: function () {
                   let chartInstance = this.chart,
                     ctx = chartInstance.ctx;
 
@@ -362,31 +362,31 @@ const getDailyWeather = async cityDetails => {
                   );
                   ctx.textAlign = "center";
                   ctx.textBaseline = "bottom";
-                  this.data.datasets.forEach(function(dataset, i) {
+                  this.data.datasets.forEach(function (dataset, i) {
                     let meta = chartInstance.controller.getDatasetMeta(i);
-                    meta.data.forEach(function(bar, index) {
+                    meta.data.forEach(function (bar, index) {
                       let data = dataset.data[index] + "°";
                       ctx.fillText(data, bar._model.x, bar._model.y - 8);
                     });
                   });
-                }
-              }
-            }
+                },
+              },
+            },
           });
 
           /* End Chart.js */
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     });
   });
 };
 
-const getHoulyWeather = async cityDetails => {
+const getHoulyWeather = async (cityDetails) => {
   const hourWeather = await getHourWeahter(cityDetails.Key);
   console.log("hourWeatherDetails", hourWeather);
   let hours = [];
   let hoursTemperature = [];
-  hourWeather.forEach(hour => {
+  hourWeather.forEach((hour) => {
     const currHour = new Date(hour.DateTime).toUTCString().substring(17, 19);
 
     hours.push(currHour + "h");
@@ -406,7 +406,7 @@ const getHoulyWeather = async cityDetails => {
           backgroundColor: "rgba(255, 255, 255, 0.3)",
           pointBackgroundColor: colors,
           borderColor: colors,
-          data: hoursTemperature
+          data: hoursTemperature,
         },
         {
           backgroundColor: "rgba(255, 255, 255, 0.3)",
@@ -414,23 +414,23 @@ const getHoulyWeather = async cityDetails => {
           pointBackgroundColor: colors,
           borderColor: colors,
           data: hoursTemperature,
-          type: "line"
-        }
-      ]
+          type: "line",
+        },
+      ],
     },
 
     // Configuration options go here
     options: {
       legend: {
-        display: false
+        display: false,
       },
       layout: {
         padding: {
           left: -20,
           right: 0,
           top: 20,
-          bottom: -5
-        }
+          bottom: -5,
+        },
       },
       scales: {
         xAxes: [
@@ -438,37 +438,37 @@ const getHoulyWeather = async cityDetails => {
             barPercentage: 0.04,
             gridLines: {
               offsetGridLines: true,
-              color: "rgba(0, 0, 0, 0)"
+              color: "rgba(0, 0, 0, 0)",
             },
             ticks: {
               fontFamily: "Fredoka One",
               fontColor: colors,
               padding: -5,
-              fontSize: 12
-            }
-          }
+              fontSize: 12,
+            },
+          },
         ],
         yAxes: [
           {
             gridLines: {
-              color: "rgba(0, 0, 0, 0)"
+              color: "rgba(0, 0, 0, 0)",
             },
             ticks: {
               fontFamily: "Fredoka One",
               fontColor: colors,
               display: false,
-              fontSize: 12
+              fontSize: 12,
             },
-            stacked: true
-          }
-        ]
+            stacked: true,
+          },
+        ],
       },
       hover: {
-        animationDuration: 0
+        animationDuration: 0,
       },
       animation: {
         duration: 2000,
-        onComplete: function() {
+        onComplete: function () {
           let chartInstance = this.chart,
             ctx = chartInstance.ctx;
 
@@ -478,16 +478,16 @@ const getHoulyWeather = async cityDetails => {
           );
           ctx.textAlign = "center";
           ctx.textBaseline = "bottom";
-          this.data.datasets.forEach(function(dataset, i) {
+          this.data.datasets.forEach(function (dataset, i) {
             let meta = chartInstance.controller.getDatasetMeta(i);
-            meta.data.forEach(function(bar, index) {
+            meta.data.forEach(function (bar, index) {
               let data = dataset.data[index] + "°";
               ctx.fillText(data, bar._model.x, bar._model.y - 8);
             });
           });
-        }
-      }
-    }
+        },
+      },
+    },
   });
 
   /* End Chart.js */
@@ -496,7 +496,7 @@ const getHoulyWeather = async cityDetails => {
 const UpdateGetHoulyWeather = async () => {
   let hours = [];
   let hoursTemperature = [];
-  hourWeather.forEach(hour => {
+  hourWeather.forEach((hour) => {
     const currHour = new Date(hour.DateTime).toUTCString().substring(17, 19);
 
     hours.push(currHour + "h");
@@ -516,7 +516,7 @@ const UpdateGetHoulyWeather = async () => {
           backgroundColor: "rgba(255, 255, 255, 0.3)",
           pointBackgroundColor: colors,
           borderColor: colors,
-          data: hoursTemperature
+          data: hoursTemperature,
         },
         {
           backgroundColor: "rgba(255, 255, 255, 0.3)",
@@ -524,23 +524,23 @@ const UpdateGetHoulyWeather = async () => {
           pointBackgroundColor: colors,
           borderColor: colors,
           data: hoursTemperature,
-          type: "line"
-        }
-      ]
+          type: "line",
+        },
+      ],
     },
 
     // Configuration options go here
     options: {
       legend: {
-        display: false
+        display: false,
       },
       layout: {
         padding: {
           left: -20,
           right: 0,
           top: 20,
-          bottom: -5
-        }
+          bottom: -5,
+        },
       },
       scales: {
         xAxes: [
@@ -548,37 +548,37 @@ const UpdateGetHoulyWeather = async () => {
             barPercentage: 0.04,
             gridLines: {
               offsetGridLines: true,
-              color: "rgba(0, 0, 0, 0)"
+              color: "rgba(0, 0, 0, 0)",
             },
             ticks: {
               fontFamily: "Fredoka One",
               fontColor: colors,
               padding: -5,
-              fontSize: 12
-            }
-          }
+              fontSize: 12,
+            },
+          },
         ],
         yAxes: [
           {
             gridLines: {
-              color: "rgba(0, 0, 0, 0)"
+              color: "rgba(0, 0, 0, 0)",
             },
             ticks: {
               fontFamily: "Fredoka One",
               fontColor: colors,
               display: false,
-              fontSize: 12
+              fontSize: 12,
             },
-            stacked: true
-          }
-        ]
+            stacked: true,
+          },
+        ],
       },
       hover: {
-        animationDuration: 0
+        animationDuration: 0,
       },
       animation: {
         duration: 2000,
-        onComplete: function() {
+        onComplete: function () {
           let chartInstance = this.chart,
             ctx = chartInstance.ctx;
 
@@ -588,16 +588,16 @@ const UpdateGetHoulyWeather = async () => {
           );
           ctx.textAlign = "center";
           ctx.textBaseline = "bottom";
-          this.data.datasets.forEach(function(dataset, i) {
+          this.data.datasets.forEach(function (dataset, i) {
             let meta = chartInstance.controller.getDatasetMeta(i);
-            meta.data.forEach(function(bar, index) {
+            meta.data.forEach(function (bar, index) {
               let data = dataset.data[index] + "°";
               ctx.fillText(data, bar._model.x, bar._model.y - 8);
             });
           });
-        }
-      }
-    }
+        },
+      },
+    },
   });
 
   /* End Chart.js */
@@ -608,7 +608,7 @@ const ListCitySet = () => {
     const cityStored = JSON.parse(localStorage.getItem("citySet"));
     console.log("cityStored", cityStored);
 
-    cityStored.forEach(city => {
+    cityStored.forEach((city) => {
       list_City.innerHTML += `   <li class="list_City">${city.toUpperCase()}</li>`;
     });
   }
@@ -657,7 +657,7 @@ const toogleSidebars = () => {
   /* End Sidebars toggle  */
 };
 
-const getCityBySearch = async city => {
+const getCityBySearch = async (city) => {
   const cityURI =
     "http://dataservice.accuweather.com/locations/v1/cities/search";
   const query = `?apikey=${accuWeatherKey}&q=${city}`;
@@ -670,14 +670,14 @@ const getCityBySearch = async city => {
 ListCitySet();
 updateCurrentWeatherUI()
   .then(() => updateDailyWeatherUI().then(() => updateHourlyWeatherUI()))
-  .catch(error => console.log(error));
+  .catch((error) => console.log(error));
 
 toogleSidebars();
 
 //Loading img before the âge finish rendering
-window.onload = event => {
+window.onload = (event) => {
   function onReady(callback) {
-    var intervalId = window.setInterval(function() {
+    var intervalId = window.setInterval(function () {
       if (document.getElementsByTagName("body")[0] !== undefined) {
         window.clearInterval(intervalId);
         callback.call(this);
@@ -694,7 +694,7 @@ window.onload = event => {
     }
   }
 
-  onReady(function() {
+  onReady(function () {
     setVisible(".app", true);
     setVisible(".loading", false);
   });

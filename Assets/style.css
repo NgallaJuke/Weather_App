@@ -13,10 +13,11 @@
 body {
   margin: 0;
   padding: 0;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   color: black;
+}
+.container {
+  background-color: rgb(58, 58, 58);
+  height: 100vh;
 }
 
 .grid {
@@ -42,8 +43,9 @@ body {
   text-align: center;
   font-weight: bold;
   font-size: 1.2em;
-  transition: 0.5s;
+  transition: 1s;
   z-index: 100;
+  display: none;
 }
 
 .sidebar_right {
@@ -64,6 +66,7 @@ body {
 
 .sidebar.active {
   left: 0;
+  display: block;
 }
 .sidebar_right.active {
   right: 0;
@@ -133,10 +136,14 @@ body {
 .app {
   position: relative;
   color: var(--main-day-text-icons-color);
-  width: 100vw;
+  width: 414px;
   height: 100vh;
   font-family: "Fredoka One";
   padding: 0.2em 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 auto;
   grid-template-columns: repeat(5, 1fr);
   grid-template-areas:
     "header header header header header "
@@ -279,6 +286,7 @@ body {
   left: -10px;
   top: -5px;
   font-size: 0.7em;
+  margin-right: 0.2em;
 }
 #deg {
   position: relative;
@@ -286,7 +294,7 @@ body {
   left: -0.15em;
   font-size: 1em;
   font-weight: 10;
-  margin-left: 0.1em;
+  margin-left: 0.2em;
 }
 .hourly_condition {
   grid-area: hourly_condition;
@@ -435,6 +443,9 @@ body {
   text-align: center;
   font-weight: bold;
 }
-.fade {
-  display: none;
+
+@media screen and (max-width: 480px) {
+  .app {
+    width: 100vw;
+  }
 }
