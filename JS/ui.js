@@ -72,8 +72,8 @@ const updateColorText = () => {
     );
   } else {
     daily_condition.style.color = "white";
-    document.querySelector("body").style.backgroundImage =
-      "url('../Assets/SkyBlue-Night.jpeg')";
+    document.querySelector(".app").style.backgroundImage =
+      "url('../Assets/SkyBlue_Night.jpeg')";
   }
 };
 
