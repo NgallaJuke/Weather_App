@@ -1,5 +1,3 @@
-const accuWeatherKey = "";
-const openWeatherKey = "";
 const geolocaKey = "82058c447167c6";
 const weatherURI = "http://dataservice.accuweather.com/currentconditions/v1/";
 
