@@ -1,10 +1,17 @@
 # Description
 
-Hey! This app is made for beginners who wants to learn to make a weather app using vannilla javascript. I myself at the time making this app was learning from a Udemy course made by The NetNinja and got inspirated form there after doing a small version of a app like this on. I hope youl like it and learn from it and make some changes to it .
+Hey! This app is made for beginners who wants to learn how to make a weather app using Vanilla Javascript. I myself, at the time making this app, was learning from a Udemy course made by Shaun Pelling [The Net Ninja](https://www.udemy.com/course/modern-javascript-from-novice-to-ninja/) and got inspirated form there after doing a small version of an app like this on.
 
-<div style="display: flex; width:100%; justify-content: space-between;">
+This is not the best way to do it so I will do my best to improve it time to times while keeping everthing as simple as I can !
+
+I hope you'll like it and learn from it and make some changes to it.
+
+<div style="display: flex; justify-content: space-between;">
 <img src="./Assets/Screenshot (30).png" height="350px">
 <img src="./Assets/Screenshot (31).png" height="350px">
+
+</div>
+<div style="display: flex; justify-content: space-between;">
 <img src="./Assets/Screenshot (32).png" height="350px">
 <img src="./Assets/Screenshot (34).png" height="350px">
 </div>
