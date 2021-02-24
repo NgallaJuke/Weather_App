@@ -2,7 +2,7 @@
 
 Hey! This app is made for beginners who wants to learn to make a weather app using vannilla javascript. I myself at the time making this app was learning from a Udemy course made by The NetNinja and got inspirated form there after doing a small version of a app like this on. I hope youl like it and learn from it and make some changes to it .
 
-<div style="display: flex; justify-content: space-between;">
+<div style="display: flex; width:100%; justify-content: space-between;">
 <img src="./Assets/Screenshot (30).png" height="350px">
 <img src="./Assets/Screenshot (31).png" height="350px">
 <img src="./Assets/Screenshot (32).png" height="350px">
